@@ -7,8 +7,10 @@ export default defineNuxtConfig({
         }
     },
     modules: [
-      '@nuxt/ui',
-      '@nuxtjs/supabase',
+        '@nuxt/ui',
+        '@nuxtjs/supabase',
+        '@vueuse/nuxt',
+        '@nuxt/content',
     ],
     runtimeConfig: {
       public: {
@@ -16,11 +18,30 @@ export default defineNuxtConfig({
         SUPBASE_KEY: ''
       }
     },
+    content: {
+        api: {
+            baseURL: '/api/_content'
+        },
+        documentDriven: {
+            injectPage: false
+        },
+        navigation: {
+            fields: ['date']
+        },
+        sources: {
+            // overwrite default source AKA `content` directory
+            content: {
+                driver: 'fs',
+                prefix: '/news', // All contents inside this source will be prefixed with `/docs`
+                base: 'content'
+            }
+        },
+    },
     supabase: {
       redirectOptions: {
         login: '/login',
         callback: '/confirm',
-        exclude: ['/']
+        exclude: ['/', '/news/*', '/news']
       }
     }
   })
