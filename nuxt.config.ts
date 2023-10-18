@@ -1,4 +1,5 @@
 export default defineNuxtConfig({
+    ssr: false,
     devtools: false,
     hooks: {
         close: () => {
@@ -18,6 +19,9 @@ export default defineNuxtConfig({
       }
     },
     content: {
+        experimental: {
+            clientDB: true
+        },
         api: {
             baseURL: '/api/_content'
         },
