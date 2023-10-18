@@ -28,9 +28,7 @@ async function listFilesInDirectory(directory: string, prefix = '') {
     }
   }));
 
-  // Flatten the array and return it
-  console.log(files);
-  
+  // Flatten the array and return it  
   return Array.prototype.concat(...files);
 }
 
