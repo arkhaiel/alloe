@@ -4,7 +4,7 @@ const user = useSupabaseUser()
 const toast = useToast()
 
 const loading = ref(false)
-const email = ref('mathieu.nicolas@me.com')
+const email = ref('')
 
 const handleLogin = async () => {
   try {
@@ -16,7 +16,7 @@ const handleLogin = async () => {
     }
   })
     if (error) throw error
-    toast.add({ title: 'Check your email for the login link!' })
+    toast.add({ title: 'Vérifiez votre boîte mail, vous avez du courrier !' })
   } catch (error) {
     toast.add({ title: error.error_description || error.message })
   } finally {
@@ -33,7 +33,7 @@ const handleLogin = async () => {
         </UFormGroup>
 
         <div class="flex flex-row justify-around mt-2">
-        <UButton @click="handleLogin" :label="loading ? 'Loading' : 'Send magic link'"></UButton>
+        <UButton @click="handleLogin" :label="loading ? 'Loading' : 'Recevoir un magic link !'"></UButton>
         </div>
   </UCard>
 </template>
