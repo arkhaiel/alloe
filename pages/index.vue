@@ -10,7 +10,7 @@ const toast = useToast()
 
   <UContainer>
     <Login v-if="!user" />
-    <Welcome />
+    <Welcome v-else />
 
     <div>
     <p class="text-center mt-4 text-xl">Plateforme destinée à l'écriture collaborative. Écrire ensemble, pour le plaisir !</p>

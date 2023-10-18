@@ -15,13 +15,8 @@ const isDark = computed({
 
 const items = [
   [{
-    label: userData.value ? userData.value.username : 'Profile',
-    avatar: {
-      src: 'https://avatars.githubusercontent.com/u/739984?v=4'
-    }
-  }, {
     label: 'Déconnexion',
-    click: () => { client.auth.signOut(); navigateTo('/') }
+    click: () => { client.auth.signOut(); userData.value = NULL; navigateTo('/') }
   }]
 ]
 </script>
@@ -30,7 +25,7 @@ const items = [
   <div class="header sticky top-0 z-50 w-full backdrop-blur flex flex-row justify-between mb-8 border-b border-gray-900/10 dark:border-gray-50/[0.06] bg-white/75 dark:bg-gray-900/75">
   <Logo />
   <div class="flex flex-row justify-between content-center items-center">
-  <UDropdown :items="items" v-if="userData">
+  <UDropdown :items="items" v-if="user">
       <UButton color="white" :label="userData.username" trailing-icon="i-heroicons-chevron-down-20-solid" />
     </UDropdown>
 
