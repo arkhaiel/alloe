@@ -12,7 +12,7 @@ const handleLogin = async () => {
     const { error } = await supabase.auth.signInWithOtp({
     email: email.value,
     options: {
-      emailRedirectTo: 'http://localhost:3000/confirm',
+      emailRedirectTo: process.env.NODE_ENV === 'development' ? 'http://localhost:3000/confirm':'https://alloe.fr/confirm',
     }
   })
     if (error) throw error
