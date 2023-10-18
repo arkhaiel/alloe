@@ -1,0 +1,58 @@
+<script setup>
+const colorMode = useColorMode()
+const userData = useUserData()
+const user = useSupabaseUser()
+const client = useSupabaseClient()
+
+const isDark = computed({
+  get () {
+    return colorMode.value === 'dark'
+  },
+  set () {
+    colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
+  }
+})
+
+const items = [
+  [{
+    label: userData.value ? userData.value.username : 'Profile',
+    avatar: {
+      src: 'https://avatars.githubusercontent.com/u/739984?v=4'
+    }
+  }, {
+    label: 'Déconnexion',
+    click: () => { client.auth.signOut(); navigateTo('/') }
+  }]
+]
+</script>
+
+<template>
+  <div class="header sticky top-0 z-50 w-full backdrop-blur flex flex-row justify-between mb-8 border-b border-gray-900/10 dark:border-gray-50/[0.06] bg-white/75 dark:bg-gray-900/75">
+  <Logo />
+  <div class="flex flex-row justify-between content-center items-center">
+  <UDropdown :items="items" v-if="userData">
+      <UButton color="white" :label="userData.username" trailing-icon="i-heroicons-chevron-down-20-solid" />
+    </UDropdown>
+
+    <UButton
+      :icon="isDark ? 'i-heroicons-moon-20-solid' : 'i-heroicons-sun-20-solid'"
+      color="gray"
+      variant="ghost"
+      aria-label="Theme"
+      @click="isDark = !isDark"
+    />
+
+  </div>
+  </div>
+</template>
+
+<style scoped>
+.header {
+  border-bottom: 0px solid lightgray;
+}
+
+.titre {
+  font-size: 2rem;
+  flex-grow: 1;
+}
+</style>
