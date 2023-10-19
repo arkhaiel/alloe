@@ -1,11 +1,20 @@
-<script setup lang="ts">
+<template>
+    <article class="m-auto p-4 sm:p-0 lg:max-w-5xl prose dark:prose-invert">
+        <ContentRenderer :key="(page as any)._id" :value="page">
+        <h1 class="mb-0">{{ page.title }}</h1>
+        {{ useDateFormat(page.date, 'DD-MM-YYYY').value }}
+        <ContentRendererMarkdown :value="page" />
+        </ContentRenderer>
+    </article>
+</template>
+
+<script setup>
 import { useRuntimeConfig } from '#app'
 import { useContent, useContentHead, useRequestEvent } from '#imports'
 
 const { contentHead } = useRuntimeConfig().public.content
 const { page, layout } = useContent()
 
-// Page not found, set correct status code on SSR
 if (!(page as any).value && process.server) {
   const event = useRequestEvent()
   event.res.statusCode = 404
@@ -15,16 +24,3 @@ if (contentHead) {
   useContentHead(page)
 }
 </script>
-
-<template>
-  <div class="document-driven-page">
-    <NuxtLayout :name="layout as string || 'default'">
-      <ContentRenderer v-if="page" :key="(page as any)._id" :value="page">
-        <template #empty="{ value }">
-          <DocumentDrivenEmpty :value="value" />
-        </template>
-      </ContentRenderer>
-      <DocumentDrivenNotFound v-else />
-    </NuxtLayout>
-  </div>
-</template>

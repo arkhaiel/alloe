@@ -37,6 +37,7 @@ const items = [
       color="gray"
       variant="ghost"
       aria-label="Theme"
+      class="m-2"
       @click="isDark = !isDark"
     />
 
