@@ -1,5 +1,5 @@
 export default defineNuxtConfig({
-    ssr: true,
+    ssr: false,
     devtools: false,
     vue: {
         compilerOptions: {
@@ -24,9 +24,9 @@ export default defineNuxtConfig({
       }
     },
     content: {
-        // experimental: {
-        //     clientDB: true
-        // },
+        experimental: {
+            clientDB: true
+        },
         api: {
             baseURL: '/api/_content'
         },
