@@ -1,5 +1,8 @@
 <template>
-  <ULink to="/"><img class="h-16" :src="isDark ? '/logo-dark.svg' : '/logo-light.svg'" /></ULink>
+  <ULink to="/">
+  <img v-show="isDark === false" class="h-16" src="/logo-light.svg" />
+  <img v-show="isDark === true" class="h-16" src="/logo-dark.svg" />
+  </ULink>
 </template>
 
 <script setup>
