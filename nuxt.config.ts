@@ -1,6 +1,11 @@
 export default defineNuxtConfig({
-    ssr: false,
+    ssr: true,
     devtools: false,
+    vue: {
+        compilerOptions: {
+            whitespace: 'preserve'
+        }
+    },
     hooks: {
         close: () => {
             process.exit()
@@ -19,9 +24,9 @@ export default defineNuxtConfig({
       }
     },
     content: {
-        experimental: {
-            clientDB: true
-        },
+        // experimental: {
+        //     clientDB: true
+        // },
         api: {
             baseURL: '/api/_content'
         },
@@ -44,7 +49,7 @@ export default defineNuxtConfig({
       redirectOptions: {
         login: '/login',
         callback: '/confirm',
-        exclude: ['/', '/news/*', '/news']
+        exclude: ['/', '/news/*', '/news', '/cgu', '/cgu/*']
       }
     }
   })

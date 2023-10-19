@@ -10,8 +10,10 @@
 
 <script setup>
 const { path } = useRoute();
-
+// const test = this.$route
+console.log(path);
 const { data } = await useAsyncData(`content-${path}`, () => {
   return queryContent().where({ _path: path }).findOne()
 })
+console.log(data);
 </script>
