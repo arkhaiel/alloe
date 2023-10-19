@@ -24,8 +24,8 @@ const items = [
 <template>
   <div class="header absolute bottom-0 z-50 w-full backdrop-blur flex flex-row items-center justify-around border-b border-gray-900/10 dark:border-gray-50/[0.06] bg-white/75 dark:bg-gray-900/75">
     <div class="flex flex-row gap-4">
-    <UButton variant="ghost" color="gray" label="Site réalisé par M. NICOLAS" to="mailto:mathieu@alloe.fr" />
-    <UButton variant="ghost" color="gray" label="Conditions générales d'utilisation" to="/cgu" />
+    <UButton variant="ghost" size="2xs" color="gray" label="Site réalisé par M. NICOLAS" to="mailto:mathieu@alloe.fr" />
+    <UButton variant="ghost" size="2xs" color="gray" label="CGU" to="/cgu" />
     </div>
   </div>
 </template>

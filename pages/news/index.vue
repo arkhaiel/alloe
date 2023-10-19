@@ -2,7 +2,7 @@
   <UContainer>
     <UTable :rows="rows" :columns="cols">
     <template #date-data="{ row }">{{ useDateFormat(row.date, 'DD-MM-YYYY').value.replaceAll('-', '/') }}</template>
-    <template #title-data="{ row }"><UButton :label="row.title" :to="'/news'+row._path" variant="link" /></template>
+    <template #title-data="{ row }"><UButton :label="row.title" :to="'/news'+row._path" variant="link" class="whitespace-normal" /></template>
     </UTable>
     </UContainer>
 </template>
