@@ -1,24 +1,4 @@
 <script setup>
-const colorMode = useColorMode()
-const userData = useUserData()
-const user = useSupabaseUser()
-const client = useSupabaseClient()
-
-const isDark = computed({
-  get () {
-    return colorMode.value === 'dark'
-  },
-  set () {
-    colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
-  }
-})
-
-const items = [
-  [{
-    label: 'Déconnexion',
-    click: () => { client.auth.signOut(); userData.value = null; navigateTo('/') }
-  }]
-]
 </script>
 
 <template>
