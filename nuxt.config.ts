@@ -31,7 +31,7 @@ export default defineNuxtConfig({
             baseURL: '/api/_content'
         },
         documentDriven: {
-            injectPage: false
+            injectPage: true
         },
         navigation: {
             fields: ['date']
