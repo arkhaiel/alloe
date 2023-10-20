@@ -12,8 +12,9 @@ const def = slots.default()
 </script>
 
 <style>
-.prose a {
-  text-decoration: none;
+.prose p a {
+  text-decoration: underline dotted;
+  text-underline-offset: 4px;
 }
 </style>
 

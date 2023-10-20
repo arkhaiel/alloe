@@ -10,8 +10,8 @@ defineShortcuts({
 </script>
 
 <template>
-    <Header />
-    <NuxtPage />
-    <Footer />
-    <UNotifications />
-  </template>
+  <Header />
+  <NuxtPage class="min-h-[80vh]"  />
+  <Footer />
+  <UNotifications />
+</template>

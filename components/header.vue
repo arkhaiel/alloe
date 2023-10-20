@@ -32,6 +32,7 @@ const items = [
       <UButton color="white" :label="userData.username ? userData.username : 'incomplet'" trailing-icon="i-heroicons-chevron-down-20-solid" />
     </UDropdown>
 
+    <ColorPicker />
     <UButton
       :icon="isDark ? 'i-heroicons-moon-20-solid' : 'i-heroicons-sun-20-solid'"
       color="gray"
