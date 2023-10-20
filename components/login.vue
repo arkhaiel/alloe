@@ -52,7 +52,7 @@ const validateOTP = async () => {
         </UCheckbox>
 
         <div class="flex flex-row justify-around mt-4">
-        <UButton :disabled="mode === 'insc' && cgu === false" @click="handleLogin" :label="loading ? 'Patientez...' : mode === 'auth' ? 'Recevoir un magic link !' : mode === 'insc' ? 'Créer un compte' : 'Erreur'"></UButton>
+        <UButton :disabled="mode === 'insc' && cgu === false" @click="handleLogin" :label="loading ? 'Patientez...' : mode === 'auth' ? 'Se connecter' : mode === 'insc' ? 'Créer un compte' : 'Erreur'"></UButton>
         </div>
   </UCard>
   <UCard v-else>

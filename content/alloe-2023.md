@@ -6,13 +6,12 @@ title: alloé 2023, les inscriptions sont ouvertes !
 Une semaine avant le début des réjouissances, les inscriptions sont ouvertes ! Cette année, **alloé** évolue considérablement, et avant de pouvoir vous présenter la première version de la plateforme qui accueillera désormais nos écritures collaboratives, je vais prendre le temps de vous raconter rapidement son histoire.
 
 ## Inscriptions pour l'alloé 2023
-Pour participer à l'alloé 2023 (et pour tous les alloé qui suivront, *a priori*), vous devez simplement vous inscrire sur cette plateforme. Pour l'instant, le seul mode d'inscription et d'authentification que j'ai mis en place est le **magic link**. Que ce soit pour vous connecter, ou pour vous inscrire, la démarche est simplissime :
+Pour participer à l'alloé 2023 (et pour tous les alloé qui suivront, *a priori*), vous devez simplement vous inscrire sur cette plateforme. Pour l'instant, le seul mode d'inscription et d'authentification que j'ai mis en place est le **code à usage unique**. Que ce soit pour vous connecter, ou pour vous inscrire, la démarche est simplissime :
 - vous renseignez votre adresse mail
-- en quelques secondes, vous recevez un mail qui contient un lien
-- vous cliquez sur le lien
+- en quelques secondes, vous recevez un mail qui contient un lien ainsi qu'un code à 6 chiffres
+- vous recopiez le code dans la fenêtre du site, ou vous cliquez sur le lien
 - *et voilà !*
 
-Si vous n'aviez pas de compte, il est créé, et si vous aviez déjà un compte, vous êtes connecté !
 
 ## Comment ça va se passer ?
 Les détails arriveront rapidement, mais voici quelques éléments factuels :

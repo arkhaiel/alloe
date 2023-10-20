@@ -22,26 +22,25 @@ const items = [
 </script>
 
 <template>
-  <div class="header sticky top-0 z-50 w-full backdrop-blur flex flex-row items-center justify-between mb-8 border-b border-gray-900/10 dark:border-gray-50/[0.06] bg-white/75 dark:bg-gray-900/75">
+  <div class="header sticky top-0 z-50 w-full backdrop-blur grid grid-cols-3 mb-8 border-b border-gray-900/10 dark:border-gray-50/[0.06] bg-white/75 dark:bg-gray-900/75">
   <Logo :isDark="isDark" />
 
-  <UButton label="news" variant="ghost" to="/news" />
+  <div class="flex flex-row justify-center">
+    <UButton label="news" variant="ghost" to="/news" />
+  </div>
 
-  <div class="flex flex-row justify-between content-center items-center">
-  <UDropdown :items="items" v-if="user && userData">
-      <UButton color="white" :label="userData.username ? userData.username : 'incomplet'" trailing-icon="i-heroicons-chevron-down-20-solid" />
-    </UDropdown>
-
+  <div class="flex flex-row justify-end content-center items-center gap-2 pr-2">
     <ColorPicker />
     <UButton
       :icon="isDark ? 'i-heroicons-moon-20-solid' : 'i-heroicons-sun-20-solid'"
       color="gray"
       variant="ghost"
       aria-label="Theme"
-      class="m-2"
       @click="isDark = !isDark"
     />
-
+    <UDropdown :items="items" v-if="user && userData">
+      <UButton color="white" :label="userData.username ? userData.username : 'incomplet'" trailing-icon="i-heroicons-chevron-down-20-solid" />
+    </UDropdown>
   </div>
   </div>
 </template>

@@ -1,26 +1,34 @@
 <script setup>
-const user = useSupabaseUser()
+const appState = useAppState()
 const userData = useUserData()
+
+// <UFormGroup label="Avatar" class="my-4 text-center">
+//         <UserAvatar v-if="userData.avatar_url" />
+//         <AvatarW v-else />
+// </UFormGroup>
 </script>
 
 <template>
     <UCard v-if="userData">
     <template #header>
-        <p>Bienvenue {{ userData.username }} !</p>
-        <p>En attendant le jour J, il est possible de personnaliser son compte. Pour l'instant, trois informations : le pseudo auquel seront associés tes chapitres, la bio que tu voudrais partager avec les autres utilisateurs, et l'avatar que tu voudrais associer à ton compte.</p>
+    <div class="prose">
+        <h2>Bienvenue {{ userData.username }} !</h2>
+        <p>En attendant le jour J, il est possible de personnaliser son compte. Pour l'instant, deux informations : le pseudo auquel seront associés tes chapitres et la bio que tu voudrais partager avec les autres utilisateurs.</p>
+    </div>
     </template>
-
 
     <UFormGroup label="Pseudo">
     <UInput v-model="userData.username" />
     </UFormGroup>
 
     <UFormGroup label="Bio" class="my-4">
-    <UInput v-model="userData.bio" />
+    <UInput v-model="userData.bio" placeholder="allez, on écrit !" />
     </UFormGroup>
 
     <template #footer>
-    <AvatarW v-if="false" />
+    <div class="text-center">
+    <UButton label="Enregistrer les modifications" @click="saveUserData()" />
+    </div>
     </template>
     </UCard>
 </template>
