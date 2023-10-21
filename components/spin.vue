@@ -49,7 +49,7 @@
         0% {
           transform: rotate(0);
         }
-        48%, 52% {
+        50% {
           transform: rotate(360deg);
         }
         100% {
@@ -60,7 +60,7 @@
         0% {
           transform: rotate(0);
         }
-        48%, 52% {
+        50% {
           transform: rotate(60deg);
         }
         100% {
@@ -71,7 +71,7 @@
         0% {
           transform: rotate(0);
         }
-        48%, 52% {
+        50% {
           transform: rotate(120deg);
         }
         100% {
@@ -82,7 +82,7 @@
         0% {
           transform: rotate(0);
         }
-        48%, 52% {
+        50% {
           transform: rotate(180deg);
         }
         100% {
@@ -93,7 +93,7 @@
         0% {
           transform: rotate(0);
         }
-        48%, 52% {
+        50% {
           transform: rotate(240deg);
         }
         100% {
@@ -104,7 +104,7 @@
         0% {
           transform: rotate(0);
         }
-        48%, 52% {
+        50% {
           transform: rotate(300deg);
         }
         100% {

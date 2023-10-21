@@ -27,12 +27,12 @@ const infoCook = useCookie('info-ouv', {
     </div>
 
     <div v-else>
-    <UAlert :close-button="{ icon: 'i-heroicons-x-mark-20-solid', color: 'gray', variant: 'link', padded: false }"
+    <UAlert :close-button="{ icon: 'i-heroicons-x-mark-20-solid', color: 'gray', variant: 'link', padded: false }" title="Ouverture le 28 Octobre !"
     class="max-w-lg mb-16 mx-auto"
     v-if="infoCook" @close="infoCook = false">
-    <template #title>
+    <template #title="{ title }">
     <Spin class="m-auto" />
-    <div class="text-sm font-medium">Ouverture le 28 Octobre !</div>
+    <div class="text-sm font-medium">{{ title }}</div>
     </template>
     <template #description>
     <p>En attendant le grand jour, vous pouvez créer votre compte <UIcon name="i-heroicons-arrow-down" /></p>

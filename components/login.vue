@@ -3,12 +3,33 @@ const supabase = useSupabaseClient()
 const user = useSupabaseUser()
 const toast = useToast()
 
+const countdown = ref()
+const cdInterval = ref()
+
+const startCD = () => {
+  countdown.value = 60
+  cdInterval.value = setInterval(() => {
+    countdown.value -= 1
+  }, 1000);
+}
+
+watch(countdown, () => {
+  if(countdown.value <= 0) {
+    clearInterval(cdInterval.value)
+    countdown.value = null
+  }
+})
+
 const loading = ref(false)
 const email = ref('')
 
 const props = defineProps(['mode'])
 const cgu = ref(false)
-const waitCode = ref(false)
+const waitCode = useCookie('waitCode', {
+  default: () => false,
+  maxAge: 3600,
+  SameSite: 'lax'
+})
 
 const handleLogin = async () => {
   try {
@@ -22,7 +43,8 @@ const handleLogin = async () => {
   })
     if (error) throw error
     toast.add({ title: 'Vérifiez votre boîte mail, vous avez du courrier !' })
-    waitCode.value = true
+    waitCode.value = props.mode
+    startCD()
   } catch (error) {
     toast.add({ title: error.error_description || error.message })
   } finally {
@@ -39,11 +61,19 @@ const validateOTP = async () => {
   const { data, error } = await supabase.auth.verifyOtp({ email: email.value, token: OTPcode.value, type: 'email'})
   console.log(data);
 }
+
+const isMail = computed(() => {
+  return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email.value)
+})
 </script>
 
 <template>
-    <UCard v-if="!waitCode">
-        <UInput type="email" placeholder="Votre adresse mail" v-model="email" />
+    <UCard v-if="waitCode != props.mode">
+        <UInput type="email" placeholder="Votre adresse mail" v-model="email" :trailing="(!isMail && email) ? true : false">
+          <template #trailing>
+              <UIcon name="i-heroicons-exclamation-triangle" color="red" v-show="!isMail && email"  />
+          </template>
+        </UInput>
         <UCheckbox v-model="cgu" class="mt-4 justify-center" v-if="mode === 'insc'">
         <template #label>
           <UButton @click="cgu = !cgu" variant="ghost" color="black" :padded="false">J'ai bien lu et j'accepte les CGU</UButton>
@@ -54,7 +84,7 @@ const validateOTP = async () => {
         </div>
 
         <div class="flex flex-row justify-around mt-4">
-        <UButton :disabled="mode === 'insc' && cgu === false" @click="handleLogin" :label="loading ? 'Patientez...' : mode === 'auth' ? 'Se connecter' : mode === 'insc' ? 'Créer un compte' : 'Erreur'"></UButton>
+        <UButton :disabled="(mode === 'insc' && cgu === false) || countdown != null" @click="handleLogin" :label="countdown ? 'Attendre '+countdown+'s' : loading ? 'Patientez...' : mode === 'auth' ? 'Se connecter' : mode === 'insc' ? 'Créer un compte' : 'Erreur'"></UButton>
         </div>
   </UCard>
   <UCard v-else>
@@ -62,8 +92,9 @@ const validateOTP = async () => {
 
   <UInput v-model="OTPcode" placeholder="------" size="t5xl" rows="1" :ui="{ base: 'text-center font-mono' }" />
   
-  <div class="flex flex-col justify-around mt-4">
+  <div class="flex flex-col justify-around items-center mt-4">
     <UButton @click="validateOTP" label="Connexion" />
+    <UButton size="2xs" variant="ghost" @click="waitCode = false" label="Retour au mail" />
   </div>
   </UCard>
 </template>
