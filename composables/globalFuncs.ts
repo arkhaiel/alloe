@@ -37,7 +37,7 @@ export const useUserData = (rfr) => {
   
       const res = await supabase
       .from('users')
-      .select('id, username, bio, avatar_url')
+      .select('id, username, bio, avatar_url, mailing')
       .eq('id', user.value.id)
       .single()
   

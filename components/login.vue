@@ -46,10 +46,12 @@ const validateOTP = async () => {
         <UInput type="email" placeholder="Votre adresse mail" v-model="email" />
         <UCheckbox v-model="cgu" class="mt-4 justify-center" v-if="mode === 'insc'">
         <template #label>
-          <div class="cursor-pointer" @click="cgu = !cgu">J'ai bien lu et j'accepte les CGU</div>
-          <UButton variant="ghost" to="/cgu" label="(Pour lire les CGU, c'est par ici)" />
+          <UButton @click="cgu = !cgu" variant="ghost" color="black" :padded="false">J'ai bien lu et j'accepte les CGU</UButton>
         </template>
         </UCheckbox>
+        <div class="flex flex-row justify-around" v-if="mode === 'insc'">
+        <UButton variant="ghost" to="/cgu" label="(Pour lire les CGU, c'est par ici)" />
+        </div>
 
         <div class="flex flex-row justify-around mt-4">
         <UButton :disabled="mode === 'insc' && cgu === false" @click="handleLogin" :label="loading ? 'Patientez...' : mode === 'auth' ? 'Se connecter' : mode === 'insc' ? 'Créer un compte' : 'Erreur'"></UButton>
@@ -58,9 +60,9 @@ const validateOTP = async () => {
   <UCard v-else>
   <p class="mb-2">Recopier le code reçu :</p>
 
-  <UInput v-model="OTPcode" size="t5xl" rows="1" :ui="{ base: 'text-center font-mono' }" />
+  <UInput v-model="OTPcode" placeholder="_ _ _ _ _ _" size="t5xl" rows="1" :ui="{ base: 'text-center font-mono' }" />
   
-  <div class="flex flex-row justify-around mt-4">
+  <div class="flex flex-col justify-around mt-4">
     <UButton @click="validateOTP" label="Connexion" />
   </div>
   </UCard>

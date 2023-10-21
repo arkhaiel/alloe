@@ -25,6 +25,12 @@ const userData = useUserData()
     <UInput v-model="userData.bio" placeholder="allez, on écrit !" />
     </UFormGroup>
 
+    <UCheckbox v-model="userData.mailing" class="mt-4 justify-center">
+        <template #label>
+          <div class="cursor-pointer" @click="cgu = !cgu">Je veux recevoir les actus alloé par mail (aucune sollicitation commerciale)</div>
+        </template>
+    </UCheckbox>
+
     <template #footer>
     <div class="text-center">
     <UButton label="Enregistrer les modifications" @click="saveUserData()" />
