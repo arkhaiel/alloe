@@ -60,7 +60,7 @@ const validateOTP = async () => {
   <UCard v-else>
   <p class="mb-2">Recopier le code reçu :</p>
 
-  <UInput v-model="OTPcode" placeholder="_ _ _ _ _ _" size="t5xl" rows="1" :ui="{ base: 'text-center font-mono' }" />
+  <UInput v-model="OTPcode" placeholder="------" size="t5xl" rows="1" :ui="{ base: 'text-center font-mono' }" />
   
   <div class="flex flex-col justify-around mt-4">
     <UButton @click="validateOTP" label="Connexion" />
