@@ -11,7 +11,7 @@ const userData = useUserData()
 <template>
     <UCard v-if="userData">
     <template #header>
-    <div class="prose">
+    <div class="prose dark:prose-invert">
         <h2>Bienvenue {{ userData.username }} !</h2>
         <p>En attendant le jour J, il est possible de personnaliser son compte. Pour l'instant, deux informations : le pseudo auquel seront associés tes chapitres et la bio que tu voudrais partager avec les autres utilisateurs.</p>
     </div>

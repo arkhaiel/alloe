@@ -32,18 +32,20 @@ export const useUserData = (rfr) => {
 
   const getData = async() => {
     const userData = useState('userData')
+    const appConfig = useAppConfig()
+
     try {
       if(!user.value) throw 'Pas de connexion'
   
       const res = await supabase
       .from('users')
-      .select('id, username, bio, avatar_url, mailing')
+      .select('id, username, bio, avatar_url, mailing, prefColor')
       .eq('id', user.value.id)
       .single()
   
       if (res.error) throw res.error
       userData.value = res.data
-
+      appConfig.ui.primary = userData.value.prefColor
     } catch(error) {
       if(error.code === 'PGRST116') {
           try {

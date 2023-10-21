@@ -33,7 +33,7 @@ const items = [
       @click="isDark = !isDark"
     />
   </div>
-  <div class="flex flex-row justify-center">
+  <div class="flex flex-row justify-center items-center">
     <UButton label="news" variant="ghost" to="/news" />
   </div>
 

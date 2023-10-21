@@ -11,12 +11,6 @@
         <div class="grid grid-cols-5 gap-px">
           <ColorPickerPill v-for="color in primaryColors" :key="color.value" :color="color" :selected="primary" @select="primary = color" />
         </div>
-
-        <hr class="border-gray-200 dark:border-gray-800 my-2">
-
-        <div class="grid grid-cols-5 gap-px">
-          <ColorPickerPill v-for="color in grayColors" :key="color.value" :color="color" :selected="gray" @select="gray = color" />
-        </div>
       </div>
     </template>
   </UPopover>
@@ -27,6 +21,7 @@ import colors from '#tailwind-config/theme/colors'
 
 const appConfig = useAppConfig()
 const colorMode = useColorMode()
+const userData = useUserData()
 
 // Computed
 
@@ -39,6 +34,10 @@ const primary = computed({
     appConfig.ui.primary = option.value
 
     window.localStorage.setItem('nuxt-ui-primary', appConfig.ui.primary)
+    userData.value.prefColor = appConfig.ui.primary
+    setTimeout(() => {
+      saveUserData()
+    }, 3000);
   }
 })
 

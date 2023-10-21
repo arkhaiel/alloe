@@ -1,4 +1,11 @@
 export default defineAppConfig({
+    head: {
+        viewport:  'width=device-width, initial-scale=1',
+        title: "alloé: allez, on écrit !",
+        noscript: [
+        { children: 'JavaScript is required' }
+        ]
+    },      
     ui: {
         textarea: {
             size: {
