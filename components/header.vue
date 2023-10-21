@@ -31,7 +31,7 @@ const items = [
     <UButton label="news" variant="ghost" to="/news" />
   </div>
 
-  <div class="flex flex-row justify-end content-center items-center gap-2 pr-2">
+  <div class="flex flex-row justify-end content-center items-center gap-0 sm:gap-2 pr-2">
     <ColorPicker />
     <UButton
       :icon="isDark ? 'i-heroicons-moon-20-solid' : 'i-heroicons-sun-20-solid'"

@@ -59,7 +59,6 @@ watch(OTPcode, (newO, oldO) => {
 }, { flush: 'post' })
 const validateOTP = async () => {
   const { data, error } = await supabase.auth.verifyOtp({ email: email.value, token: OTPcode.value, type: 'email'})
-  console.log(data);
 }
 
 const isMail = computed(() => {
