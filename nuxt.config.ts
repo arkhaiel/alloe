@@ -1,4 +1,16 @@
 export default defineNuxtConfig({
+    app: {
+        head: {
+            meta: [{
+                "name": "viewport",
+                "content": "width=device-width, initial-scale=1"
+            },
+            {
+                "charset": "utf-8"
+            }],
+            title: "alloé: allez, on écrit !"
+        }, 
+    },
     ssr: false,
     devtools: false,
     vue: {
