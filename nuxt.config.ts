@@ -28,6 +28,7 @@ export default defineNuxtConfig({
         '@nuxtjs/supabase',
         '@vueuse/nuxt',
         '@nuxt/content',
+        '@pinia/nuxt',
     ],
     runtimeConfig: {
       public: {
