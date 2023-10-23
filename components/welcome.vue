@@ -31,7 +31,7 @@ const us = useCounterStore();
 
     <UCheckbox v-model="us.userData.mailing" class="mt-4 justify-center">
       <template #label>
-        <div class="cursor-pointer" @click="cgu = !cgu">
+        <div class="cursor-pointer" @click="us.userData.mailing = !us.userData.mailing">
           Je veux recevoir les actus alloé par mail (aucune sollicitation commerciale)
         </div>
       </template>
