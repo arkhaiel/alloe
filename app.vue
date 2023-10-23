@@ -13,7 +13,7 @@ watch(page, () => {
 
 <template>
   <Header />
-  <NuxtPage class="min-h-[80vh]" />
+  <NuxtPage />
   <Footer />
   <UNotifications />
 </template>

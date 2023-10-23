@@ -57,4 +57,6 @@ const infoCook = useCookie("info-ouv", {
       </UTabs>
     </div>
   </UContainer>
+
+  <Editor />
 </template>
