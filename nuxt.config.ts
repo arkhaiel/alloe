@@ -11,8 +11,10 @@ export default defineNuxtConfig({
             title: "alloé: allez, on écrit !"
         }, 
     },
+    typescript: {
+        strict: true
+    },
     ssr: false,
-    devtools: false,
     vue: {
         compilerOptions: {
             whitespace: 'preserve'

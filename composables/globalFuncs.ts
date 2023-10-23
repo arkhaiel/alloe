@@ -8,19 +8,19 @@ export const useAppState = () => {
   })
 }
 
-export const downloadImage = async () => {
-  try {
-    const supabase = useSupabaseClient()
-    const userData = useState('userData')
-    const appState = useAppState()
+// export const downloadImage = async () => {
+//   try {
+//     const supabase = useSupabaseClient()
+//     const userData = useState('userData')
+//     const appState = useAppState()
 
-    const { data, error } = await supabase.storage.from('avatars').download(userData.value.avatar_url)
-    if (error) throw error
-    appState.value.avatarPath = URL.createObjectURL(data)
-  } catch (error: any) {
-    console.error('Error downloading image: ', error.message)
-  }
-}
+//     const { data, error } = await supabase.storage.from('avatars').download(userData.value.avatar_url)
+//     if (error) throw error
+//     appState.value.avatarPath = URL.createObjectURL(data)
+//   } catch (error: any) {
+//     console.error('Error downloading image: ', error.message)
+//   }
+// }
 
 export const createBlankProfile = async () => {
   const us = useCounterStore()
