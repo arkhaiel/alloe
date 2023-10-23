@@ -32,8 +32,9 @@
 </template>
 
 <script setup lang="ts">
-import colors from "#tailwind-config/theme/colors";
-
+import type { Colors, Nuance } from "~/colors.types";
+import colorsd from "#tailwind-config/theme/colors";
+const colors: Record<string, string | Nuance> = colorsd;
 const appConfig = useAppConfig();
 const colorMode = useColorMode();
 const us = useCounterStore();
@@ -51,16 +52,21 @@ const primaryColors = computed(() =>
 );
 const primary = computed({
   get() {
-    return primaryColors.value.find((option) => option.value === appConfig.ui.primary);
+    const data = primaryColors.value.find(
+      (option) => option.value === appConfig.ui.primary
+    );
+    return data ? data : { value: "green" };
   },
   set(option) {
-    appConfig.ui.primary = option.value;
+    if (option?.value) {
+      appConfig.ui.primary = option.value;
 
-    window.localStorage.setItem("nuxt-ui-primary", appConfig.ui.primary);
-    us.userData.prefColor = appConfig.ui.primary;
-    setTimeout(() => {
-      us.saveUserData();
-    }, 3000);
+      window.localStorage.setItem("nuxt-ui-primary", appConfig.ui.primary);
+      us.userData.prefColor = appConfig.ui.primary;
+      setTimeout(() => {
+        us.saveUserData();
+      }, 3000);
+    }
   },
 });
 
@@ -76,9 +82,10 @@ const gray = computed({
     return grayColors.value.find((option) => option.value === appConfig.ui.gray);
   },
   set(option) {
-    appConfig.ui.gray = option.value;
-
-    window.localStorage.setItem("nuxt-ui-gray", appConfig.ui.gray);
+    if (option?.value) {
+      appConfig.ui.gray = option.value;
+      window.localStorage.setItem("nuxt-ui-gray", appConfig.ui.gray);
+    }
   },
 });
 </script>

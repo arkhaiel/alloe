@@ -64,8 +64,9 @@ const login = computed(() => {
   });
 
   if (props.mode === "auth") return login;
-  if (props.mode === "insc")
+  else if (props.mode === "insc")
     return login.refine((v: any) => v.cgu == true, "les CGU doivent être acceptées");
+  else return login;
 });
 
 type Schema = z.output<typeof login.value>;
