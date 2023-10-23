@@ -133,26 +133,5 @@ const isFV = computed(() => {
       ></UButton>
     </div>
   </UCard>
-  <UCard v-else>
-    <p class="mb-2">Recopier le code reçu :</p>
-
-    <UInput
-      v-model="OTPcode"
-      placeholder="------"
-      size="t5xl"
-      rows="1"
-      :ui="{ base: 'text-center font-mono' }"
-      @keyup.enter="validateOTP"
-    />
-
-    <div class="flex flex-col justify-around items-center mt-4">
-      <UButton @click="validateOTP" label="Connexion" />
-      <UButton
-        size="2xs"
-        variant="ghost"
-        @click="us.waitCode = false"
-        label="Retour au mail"
-      />
-    </div>
-  </UCard>
+  <LoginOtp v-else :email="state.email" />
 </template>
