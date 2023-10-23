@@ -14,6 +14,8 @@ export const useCounterStore = defineStore('counter', () => {
 
   async function getUserData() {
     userData.value = await useUserData()
+    const appConfig = useAppConfig();
+    appConfig.ui.primary = userData.value.prefColor
   }
   async function saveUserData() {
     userData.value = await useSaveUserData()

@@ -92,7 +92,7 @@ const isFV = computed(() => {
 
 <template>
   <UCard v-if="us.waitCode != props.mode">
-    <UForm :schema="login" :state="state" @submit="submit" @error="errorHandle">
+    <UForm :schema="login" :state="state" @submit="handleLogin" @error="errorHandle">
       <UFormGroup label="" name="email">
         <UInput v-model="state.email" type="email" placeholder="Votre adresse mail" />
       </UFormGroup>
@@ -141,6 +141,7 @@ const isFV = computed(() => {
       size="t5xl"
       rows="1"
       :ui="{ base: 'text-center font-mono' }"
+      @keyup.enter="validateOTP"
     />
 
     <div class="flex flex-col justify-around items-center mt-4">
