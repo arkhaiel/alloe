@@ -15,7 +15,7 @@ const tabs = [
 ];
 const infoCook = useCookie("info-ouv", {
   maxAge: 3600 * 24 * 2,
-  SameSite: "Lax",
+  sameSite: "Lax",
   default: () => "true",
 });
 </script>

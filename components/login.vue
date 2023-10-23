@@ -2,7 +2,6 @@
 const supabase = useSupabaseClient();
 const toast = useToast();
 const us = useCounterStore();
-const { userDataPluging } = useNuxtApp();
 
 const loading = ref(false);
 const email = ref("");
@@ -51,6 +50,7 @@ const validateOTP = async () => {
       type: "email",
     });
     if (error) throw error;
+    console.log(data);
     us.user = data.user;
   } catch (error) {
     console.error(error);
