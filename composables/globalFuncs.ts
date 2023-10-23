@@ -17,7 +17,7 @@ export const downloadImage = async () => {
     const { data, error } = await supabase.storage.from('avatars').download(userData.value.avatar_url)
     if (error) throw error
     appState.value.avatarPath = URL.createObjectURL(data)
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error downloading image: ', error.message)
   }
 }
@@ -52,7 +52,7 @@ export const useUserData = async () => {
 
     if (error) throw error
     return data
-  } catch (error) {
+  } catch (error: any) {
     if (error.code === 'PGRST116') return await createBlankProfile()
   }
 }

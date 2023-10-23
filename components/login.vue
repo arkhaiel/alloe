@@ -50,7 +50,6 @@ const validateOTP = async () => {
       type: "email",
     });
     if (error) throw error;
-    console.log(data);
     us.user = data.user;
     us.getUserData();
   } catch (error) {
