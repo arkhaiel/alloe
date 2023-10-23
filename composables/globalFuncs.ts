@@ -22,71 +22,59 @@ export const downloadImage = async () => {
   }
 }
 
-export const useUserData = (rfr) => {
-  const user = useSupabaseUser()
-  const supabase = useSupabaseClient()
-  const userData = useState('userData')
+export const createBlankProfile = async () => {
+  const us = useCounterStore()
 
-  // console.log(userData);
-  
-
-  const getData = async() => {
-    const userData = useState('userData')
-    const appConfig = useAppConfig()
-
+  if (us.user) {
     try {
-      if(!user.value) throw 'Pas de connexion'
-  
-      const res = await supabase
-      .from('users')
-      .select('id, username, bio, avatar_url, mailing, prefColor')
-      .eq('id', user.value.id)
-      .single()
-  
-      if (res.error) throw res.error
-      userData.value = res.data
-      appConfig.ui.primary = userData.value.prefColor
-    } catch(error) {
-      if(error.code === 'PGRST116') {
-          try {
-            const user = useSupabaseUser()  
-            const rres = await supabase.from('users').insert({ id: user.value.id })
-  
-            if (rres.error) throw rres.console.error();
-            getData()
-          } catch(error) {
-            console.log(error)
-          }
-      }
+      const { data, error } = await us.supabase
+        .from('users')
+        .insert({ id: us.user.id })
+        .select()
+      if (error) throw error;
+      return data[0]
+    } catch (error) {
+      console.log(error)
     }
   }
-
-  if(!userData.value){
-    // console.log('update');
-    
-    getData()
-  } 
-  else if(rfr === true) getData()
-  return userData
 }
 
-export const saveUserData = async () => {
-  const supabase = useSupabaseClient()
-  const userData = useUserData()
+export const useUserData = async () => {
+  const us = useCounterStore()
+
+  if(us.user)
+  try {  
+    const { data, error } = await us.supabase
+    .from('users')
+    .select('*')
+    .eq('id', us.user.id)
+    .single()
+
+    if (error) throw error
+    return data
+  } catch (error) {
+    if (error.code === 'PGRST116') return await createBlankProfile()
+  }
+}
+
+export const useSaveUserData = async () => {
+  const us = useCounterStore()
   const toast = useToast()
 
+  if(us.user?.id)
   try {
-    const res = await supabase
+    const {data, error} = await us.supabase
     .from('users')
-    .update(userData.value)
-    .eq('id', userData.value.id)
+    .update(us.userData)
+    .eq('id', us.user.id)
     .select()
 
-    if(res.error) throw res.error
+    if(error) throw error
 
-    userData.value = res.data[0]
-    toast.add({ title: 'Vos informations ont été mises à jour.'})
+    toast.add({ title: 'Vos informations ont été mises à jour.' })    
+    return data[0]
   } catch (error) {
+    console.error(error);
     
   }
 }

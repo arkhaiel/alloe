@@ -1,10 +1,6 @@
 <script setup>
 const colorMode = useColorMode();
-const userData = useUserData();
-const user = useSupabaseUser();
-const client = useSupabaseClient();
-
-const counter = useCounterStore();
+const us = useCounterStore();
 
 const isDark = computed({
   get() {
@@ -20,8 +16,8 @@ const items = [
     {
       label: "Déconnexion",
       click: () => {
-        client.auth.signOut();
-        userData.value = null;
+        us.supabase.auth.signOut();
+        us.userData = null;
         navigateTo("/");
       },
     },
@@ -51,10 +47,10 @@ const items = [
         aria-label="Theme"
         @click="isDark = !isDark"
       />
-      <UDropdown :items="items" v-if="user && userData">
+      <UDropdown :items="items" v-if="us.user && us.userData">
         <UButton
           color="white"
-          :label="userData.username ? userData.username : 'incomplet'"
+          :label="us.userData.username ? us.userData.username : 'incomplet'"
         />
       </UDropdown>
     </div>
