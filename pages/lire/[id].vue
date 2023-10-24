@@ -1,13 +1,8 @@
 <template>
   <div>
     <h1>coucou</h1>
-    {{ route }}
+    <RouteTest />
   </div>
 </template>
 
-<script lang="ts" setup>
-const route = ref();
-onMounted(() => {
-  route.value = useRoute();
-});
-</script>
+<script lang="ts" setup></script>

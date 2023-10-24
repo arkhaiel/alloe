@@ -36,7 +36,6 @@ const validateOTP = async () => {
 <template>
   <UCard>
     <p class="mb-2">Recopier le code reçu :</p>
-
     <UInput
       v-model="OTPcode"
       placeholder="------"
