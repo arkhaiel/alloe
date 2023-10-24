@@ -5,6 +5,8 @@
 </template>
 
 <script lang="ts" setup>
-const route = useRoute();
-console.log(route);
+const route = ref();
+onMounted(() => {
+  route.value = useRoute();
+});
 </script>
