@@ -5,9 +5,6 @@
 </template>
 
 <script lang="ts" setup>
-const route = ref();
-
-setTimeout(() => {
-  route.value = useRoute();
-}, 1000);
+import { useRoute } from "#vue-router";
+const route = useRoute();
 </script>
