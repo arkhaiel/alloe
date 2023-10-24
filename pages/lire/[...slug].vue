@@ -5,6 +5,9 @@
 </template>
 
 <script lang="ts" setup>
-const route = useRouter();
-console.log(route);
+const route = ref();
+
+setTimeout(() => {
+  route.value = useRoute();
+}, 1000);
 </script>
