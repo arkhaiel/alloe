@@ -58,5 +58,12 @@ const infoCook = useCookie("info-ouv", {
     </div>
   </UContainer>
 
-  <Editor />
+  <UCard
+    :ui="{ base: 'max-w-3xl mx-auto my-8', ring: 'hover:ring-2 hover:ring-green-50' }"
+  >
+    <template #header>ok</template>
+    Coucou glouglou
+  </UCard>
+
+  <Editor class="my-28" />
 </template>
