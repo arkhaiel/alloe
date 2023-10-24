@@ -29,37 +29,34 @@
 </template>
 
 <script lang="ts" setup>
+const props = defineProps(["data"]);
+const emit = defineEmits(["update:data"]);
+
 const fsize = ref(1);
-const text = ref("blablablablablablablablablablablabla");
+
+const text = ref(props.data);
 const editor = ref<any>();
 const textarea: HTMLTextAreaElement | any = ref();
 const lines = computed(() => text.value.split("\n"));
 const fsizee = ["xs", "sm", "md", "lg", "xl"];
-// const fsizee = ['2xs', 'xs', 'sm', 'md', 'lg', 'xl']
-
-// const saveChap = () => {
-//   const newChap = new newChapter(text.value);
-//   newChap.insert();
-// };
 
 onMounted(() => {
   textarea.value = editor.value.$refs.textarea;
 });
 
-const totlines = computed(() => lines.value.length); // nombre de lignes au total
-const sstart = ref(); //c orrespond à SelectionStart
+const sstart = ref(); // correspond à SelectionStart
 const ssend = ref(); // correspond à SelectionEnd (en général les deux sont égaux quand on tape du texte au clavier)
 const isDial = ref(false); // est-ce qu'on est en "mode dialogue ?"
 
 const linesl = computed(() => {
   // return en fait la position du curseur, en ligne et colonne
-  const arr = lines.value.map((el) => el.length);
+  const arr = lines.value.map((el: string | any[]) => el.length);
   for (let i = 1; i < arr.length; i++) {
     arr[i] = arr[i - 1] + arr[i] + 1;
   }
   if (arr.length > 1) arr[0] = arr[0] + 0;
 
-  const lln = arr.findIndex((el) => el >= sstart.value);
+  const lln = arr.findIndex((el: string | any[]) => el >= sstart.value);
   const ln = lln == -1 ? 0 : lln;
   // console.log(ln);
 
@@ -73,9 +70,7 @@ const newline = () => {
   console.log(lines.value, pos.lineNumber);
 
   if (lines.value[pos.lineNumber - 2].match(/^— .+/)) {
-    // lines.value[pos.lineNumber -1] = '— ' + lines.value[pos.lineNumber -1]
     isDial.value = true;
-    // text.value = lines.value.join('\n')
 
     text.value = text.value.substring(0, back) + "— " + text.value.substring(back);
     setTimeout(() => {
@@ -100,6 +95,7 @@ watch(text, () => {
   }
 
   text.value = text.value.replace("-- ", "— ");
+  emit("update:data", text.value);
 });
 </script>
 

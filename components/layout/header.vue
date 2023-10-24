@@ -11,15 +11,17 @@ const isDark = computed({
   },
 });
 
+const logout = async () => {
+  us.supabase.auth.signOut();
+  us.userData = null;
+  await navigateTo("/");
+};
+
 const items = [
   [
     {
       label: "Déconnexion",
-      click: () => {
-        us.supabase.auth.signOut();
-        us.userData = null;
-        navigateTo("/");
-      },
+      click: logout,
     },
   ],
 ];
@@ -39,7 +41,7 @@ const items = [
     <div
       class="flex flex-row justify-end content-center items-center gap-0 sm:gap-2 pr-2"
     >
-      <ColorPicker />
+      <LayoutColorPicker />
       <UButton
         :icon="isDark ? 'i-heroicons-moon-20-solid' : 'i-heroicons-sun-20-solid'"
         color="gray"

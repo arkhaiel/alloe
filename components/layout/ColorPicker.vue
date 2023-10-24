@@ -18,7 +18,7 @@
     <template #panel>
       <div class="p-2">
         <div class="grid grid-cols-5 gap-px">
-          <ColorPickerPill
+          <LayoutColorPickerPill
             v-for="color in primaryColors"
             :key="color.value"
             :color="color"
@@ -62,10 +62,12 @@ const primary = computed({
       appConfig.ui.primary = option.value;
 
       window.localStorage.setItem("nuxt-ui-primary", appConfig.ui.primary);
-      us.userData.prefColor = appConfig.ui.primary;
-      setTimeout(() => {
-        us.saveUserData();
-      }, 3000);
+      if (us.userData) {
+        us.userData.prefColor = appConfig.ui.primary;
+        setTimeout(() => {
+          us.saveUserData();
+        }, 3000);
+      }
     }
   },
 });

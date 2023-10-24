@@ -4,6 +4,7 @@ const toast = useToast();
 const us = useCounterStore();
 
 const props = defineProps(["email"]);
+const route = useRoute();
 
 const OTPcode = ref();
 watch(
@@ -25,6 +26,7 @@ const validateOTP = async () => {
     if (error) throw error;
     us.user = data.user;
     us.getUserData();
+    if (route.redirectedFrom) await navigateTo(route.redirectedFrom.fullPath);
   } catch (error) {
     console.error(error);
   }

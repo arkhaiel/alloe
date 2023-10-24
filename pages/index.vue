@@ -3,16 +3,8 @@
 
 const us = useCounterStore();
 
-const tabs = [
-  {
-    key: "auth",
-    label: "Se connecter",
-  },
-  {
-    key: "insc",
-    label: "Créer un compte",
-  },
-];
+const text = ref();
+
 const infoCook = useCookie("info-ouv", {
   maxAge: 3600 * 24 * 2,
   sameSite: "Lax",
@@ -50,20 +42,6 @@ const infoCook = useCookie("info-ouv", {
           </p>
         </template>
       </UAlert>
-      <UTabs :items="tabs" class="w-full max-w-sm m-auto">
-        <template #item="{ item }">
-          <Login :mode="item.key" />
-        </template>
-      </UTabs>
     </div>
   </UContainer>
-
-  <UCard
-    :ui="{ base: 'max-w-3xl mx-auto my-8', ring: 'hover:ring-2 hover:ring-green-50' }"
-  >
-    <template #header>ok</template>
-    Coucou glouglou
-  </UCard>
-
-  <Editor class="my-28" />
 </template>

@@ -39,6 +39,7 @@ watch(
   },
   { flush: "post" }
 );
+
 const validateOTP = async () => {
   try {
     const { data, error } = await supabase.auth.verifyOtp({

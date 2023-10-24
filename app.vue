@@ -17,8 +17,10 @@ watch(page, () => {
 </script>
 
 <template>
-  <Header />
-  <NuxtPage />
-  <Footer />
-  <UNotifications />
+  <div>
+    <LayoutHeader />
+    <NuxtPage />
+    <LayoutFooter />
+    <UNotifications />
+  </div>
 </template>
