@@ -5,6 +5,6 @@
 </template>
 
 <script lang="ts" setup>
-const route = useRoute();
+const route = useRouter();
 console.log(route);
 </script>
