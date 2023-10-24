@@ -1,11 +1,11 @@
 <template>
-  <UContainer>
+  <div>
     <UTabs :items="tabs" class="w-full max-w-sm m-auto">
       <template #item="{ item }">
         <Login :mode="item.key" />
       </template>
     </UTabs>
-  </UContainer>
+  </div>
 </template>
 
 <script setup>

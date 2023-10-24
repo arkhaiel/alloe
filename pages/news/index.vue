@@ -1,5 +1,5 @@
 <template>
-  <UContainer>
+  <UCard>
     <UTable :rows="rows" :columns="cols" :sort="{ column: 'date', direction: 'desc' }">
       <template #date-data="{ row }">{{
         useDateFormat(row.date, "DD-MM-YYYY").value.replaceAll("-", "/")
@@ -12,7 +12,7 @@
           class="whitespace-normal"
       /></template>
     </UTable>
-  </UContainer>
+  </UCard>
 </template>
 
 <script setup>

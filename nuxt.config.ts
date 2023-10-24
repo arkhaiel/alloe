@@ -31,6 +31,7 @@ export default defineNuxtConfig({
         '@vueuse/nuxt',
         '@nuxt/content',
         '@pinia/nuxt',
+        '@nuxtjs/mdc'
     ],
     runtimeConfig: {
       public: {
@@ -64,7 +65,7 @@ export default defineNuxtConfig({
       redirectOptions: {
         login: '/login',
         callback: '/confirm',
-        exclude: ['/', '/news/*', '/news', '/cgu', '/cgu/*']
+        exclude: ['/', '/news/*', '/news', '/cgu', '/cgu/*', '/lire', '/lire/*']
       }
     }
   })

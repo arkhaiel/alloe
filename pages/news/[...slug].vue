@@ -1,5 +1,5 @@
 <template>
-  <article
+  <UCard
     class="m-auto p-4 sm:p-0 lg:max-w-4xl prose dark:prose-invert prose-h1:prose-2xl prose-h2:prose-xl prose-a:no-underline"
   >
     <ContentRenderer :key="page._id" :value="page">
@@ -7,7 +7,7 @@
       {{ useDateFormat(page.date, "DD-MM-YYYY").value }}
       <ContentRendererMarkdown :value="page" />
     </ContentRenderer>
-  </article>
+  </UCard>
 </template>
 
 <script setup>

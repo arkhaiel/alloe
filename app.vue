@@ -19,7 +19,9 @@ watch(page, () => {
 <template>
   <div>
     <LayoutHeader />
-    <NuxtPage />
+    <UContainer>
+      <NuxtPage />
+    </UContainer>
     <LayoutFooter />
     <UNotifications />
   </div>

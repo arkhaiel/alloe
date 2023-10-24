@@ -13,7 +13,7 @@ const infoCook = useCookie("info-ouv", {
 </script>
 
 <template>
-  <UContainer>
+  <div>
     <div class="w-full max-w-xl m-auto" v-if="us.user">
       <Welcome />
     </div>
@@ -43,5 +43,5 @@ const infoCook = useCookie("info-ouv", {
         </template>
       </UAlert>
     </div>
-  </UContainer>
+  </div>
 </template>

@@ -1,14 +1,13 @@
 <template>
-  <MDC :value="def[0].children" />
+  <MDCRenderer :body="ast.body" :data="ast.data" />
 </template>
 
 <script setup>
-import { useSlots, useAttrs } from 'vue'
+const slots = useSlots();
+const def = slots.default();
 import { parseMarkdown } from '@nuxtjs/mdc/runtime'
 
-const slots = useSlots()
-const def = slots.default()
-
+const ast = await parseMarkdown(def[0].children)
 </script>
 
 <style>
@@ -17,4 +16,3 @@ const def = slots.default()
   text-underline-offset: 4px;
 }
 </style>
-
