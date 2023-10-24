@@ -64,7 +64,7 @@ export default defineNuxtConfig({
       redirectOptions: {
         login: '/login',
         callback: '/confirm',
-        exclude: ['/', '/news/*', '/news', '/cgu', '/cgu/*', '/lire', '/lire/*']
+        exclude: ['/', '/news/*', '/news', '/cgu', '/cgu/*']
       }
     }
   })
