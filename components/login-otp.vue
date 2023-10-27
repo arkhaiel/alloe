@@ -25,7 +25,7 @@ const validateOTP = async () => {
     });
     if (error) throw error;
     us.user = data.user;
-    us.getUserData();
+    await us.getUserData();
     if (route.redirectedFrom) await navigateTo(route.redirectedFrom.fullPath);
   } catch (error) {
     console.error(error);

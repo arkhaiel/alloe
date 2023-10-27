@@ -64,9 +64,7 @@ const primary = computed({
       window.localStorage.setItem("nuxt-ui-primary", appConfig.ui.primary);
       if (us.userData) {
         us.userData.prefColor = appConfig.ui.primary;
-        setTimeout(() => {
-          us.saveUserData();
-        }, 3000);
+        us.saveUserData();
       }
     }
   },

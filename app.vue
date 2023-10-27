@@ -19,7 +19,7 @@ watch(page, () => {
 <template>
   <div>
     <LayoutHeader />
-    <UContainer>
+    <UContainer class="min-h-[90vh]">
       <NuxtPage />
     </UContainer>
     <LayoutFooter />

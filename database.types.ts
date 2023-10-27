@@ -87,26 +87,26 @@ export interface Database {
         Row: {
           created_at: string
           id: string
-          root_chapter: string | null
+          last_chap: string | null
           user: string | null
         }
         Insert: {
           created_at?: string
           id?: string
-          root_chapter?: string | null
+          last_chap?: string | null
           user?: string | null
         }
         Update: {
           created_at?: string
           id?: string
-          root_chapter?: string | null
+          last_chap?: string | null
           user?: string | null
         }
         Relationships: [
           {
-            foreignKeyName: "readings_root_chapter_fkey"
-            columns: ["root_chapter"]
-            referencedRelation: "root_chapters"
+            foreignKeyName: "readings_last_chap_fkey"
+            columns: ["last_chap"]
+            referencedRelation: "chapters"
             referencedColumns: ["id"]
           },
           {
@@ -178,26 +178,26 @@ export interface Database {
       root_chapters: {
         Row: {
           chapter: string | null
+          constrains: Json | null
           context: string | null
           created_at: string
           id: string
-          target: number | null
           title: string | null
         }
         Insert: {
           chapter?: string | null
+          constrains?: Json | null
           context?: string | null
           created_at?: string
           id?: string
-          target?: number | null
           title?: string | null
         }
         Update: {
           chapter?: string | null
+          constrains?: Json | null
           context?: string | null
           created_at?: string
           id?: string
-          target?: number | null
           title?: string | null
         }
         Relationships: [
@@ -264,7 +264,23 @@ export interface Database {
       }
     }
     Functions: {
-      [_ in never]: never
+      get_story:
+        | {
+            Args: Record<PropertyKey, never>
+            Returns: {
+              enfant: string
+              parent: string
+            }[]
+          }
+        | {
+            Args: {
+              my_id: string
+            }
+            Returns: {
+              enfant: string
+              parent: string
+            }[]
+          }
     }
     Enums: {
       [_ in never]: never

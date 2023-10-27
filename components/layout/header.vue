@@ -36,6 +36,7 @@ const items = [
     </div>
     <div class="flex flex-row justify-center items-center">
       <UButton label="news" variant="ghost" to="/news" />
+      <UButton label="lire" variant="ghost" to="/lire" />
     </div>
 
     <div

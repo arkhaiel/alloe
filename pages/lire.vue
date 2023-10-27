@@ -1,0 +1,122 @@
+<template>
+  <div v-if="true">
+  <UButton class="my-4" v-if="read.current" icon="i-heroicons-arrow-left" label="Retour" @click="goback" variant="outline" />
+  <div class="grid" :key="read.current ? read.current : 'grid'" :class="read.current ? 'grid-cols-1':'grid-cols-2 gap-4'">
+    <UCard
+      v-for="r of read.current?read.roots.filter((el: any) => el.root.id === read.current) : read.roots"
+      :key="r.root.id"
+      :ui="{ body: { padding: 'py-0 sm:py-0' } }"
+      :class="read.current ? '':'cursor-pointer'"
+      @click="lecture(r)"
+    >
+      <template #header>
+        <div class="flex flex-row justify-between">
+          <div>{{ r.root.title }}</div>
+          <div class="flex flex-row gap-1">
+            <UPopover mode="hover">
+              <UBadge size="sm" color="green" variant="subtle" class="cursor-help"
+                ><UIcon name="i-heroicons-arrow-down" />{{
+                  r.root.constrains.max_chaps
+                }}</UBadge
+              >
+              <template #panel>
+                <UCard>
+                  Ce challoé autorise la création de
+                  {{ r.root.constrains.max_chaps }} chapitres entre le début et la fin de
+                  l'histoire.
+                </UCard>
+              </template>
+            </UPopover>
+
+            <UPopover mode="hover">
+              <UBadge color="blue" variant="subtle" class="cursor-help"
+                ><UIcon name="i-heroicons-arrows-right-left" />{{
+                  r.root.constrains.max_choices
+                }}</UBadge
+              >
+              <template #panel>
+                <UCard>
+                  Ce challoé autorise la création de
+                  {{ r.root.constrains.max_choices }} suites alternatives au maximum pour
+                  chaque chapitre.
+                </UCard>
+              </template>
+            </UPopover>
+
+            <UPopover mode="hover">
+              <UBadge color="red" variant="subtle" class="cursor-help"
+                ><UIcon name="i-heroicons-document-text" />{{
+                  r.root.constrains.max_len == 9999 ? "∞" : r.root.constrains.max_len
+                }}</UBadge
+              >
+              <template #panel>
+                <UCard>
+                  Ce challoé autorise une longueur de chapitre de
+                  {{ r.root.constrains.max_len }} caractères au maximum.
+                </UCard>
+              </template>
+            </UPopover>
+          </div>
+        </div>
+      </template>
+      <div
+        class="prose dark:prose-invert whitespace-pre-wrap text-justify prose-p:indent-4 min-w-full"
+      >
+          <MdComp>{{ read.current ? r.root.text : r.root.text.slice(0, 500)+'...' }}</MdComp>
+        </div>
+
+      <template #footer v-if="true">
+        <div v-if="read.current">
+          <UButton v-for="child of r.enfants" :label="child.id" @click="new_reading(child)" />
+        </div>
+      </template>
+    </UCard>
+  </div>
+  <UButton class="my-4" v-if="read.current" icon="i-heroicons-arrow-left" label="Retour" @click="goback" variant="outline" />
+
+  <NuxtPage />
+  </div>
+</template>
+
+<script lang="ts" setup>
+const read = useReadingStore();
+await read.getRoots()
+
+if(useRoute().params.id) read.current = read.story[0].id
+
+const lecture = (r: any) => {
+  if(!read.current) {
+    read.story = [r.root]
+    read.enfants = r.enfants
+    read.current = r.root.id
+  } 
+    // await navigateTo('/lire/'+id)
+}
+
+const goback = () => {
+  read.story = []
+  read.enfants = []
+  read.current = ''
+}
+
+const new_reading = async (child: any) => {
+  const reading_id = await read.newReading(child.id)
+  
+  if(reading_id) {
+    await prevnextChap(child, reading_id[0].id)
+    await navigateTo('/lire/'+reading_id[0].id)
+  } 
+}
+</script>
+
+<style scoped>
+.v-enter-active,
+.v-leave-active {
+  transition: all 0.5s;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.v-enter-from, .v-leave-to {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+</style>
