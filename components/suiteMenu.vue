@@ -6,6 +6,7 @@
     @click="prevChap()"
     v-if="storyList.length > 1"
   />
+  <p class="italic">la présence d'une * signifie que vous êtes l'auteur de ce chapitre</p>
   <UTabs
     orientation="vertical"
     v-if="items "
@@ -54,6 +55,7 @@
 
 <script lang="ts" setup>
 const read = useReadingStore();
+const us = useCounterStore()
 const selected = ref(0);
 const parid = useRoute().params.id;
 const working = ref(false)
@@ -69,7 +71,7 @@ watch(enfants, () => {
 const makeItems = () => {
   items.value = enfants.value
     ? enfants.value.map((el: any, idx: number) => {
-        return { label: "suite " + (idx + 1), content: el.text, id: el.id };
+        return { label: `suite ${idx + 1} ${el.author === us.user.id ? '*' : ''}`, content: el.text, id: el.id };
       })
     : [];
   while (items.value.length < read.current.root.constrains.max_choices)
