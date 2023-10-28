@@ -8,6 +8,7 @@
 const params = useRoute().params
 const text = ref()
 const read = useReadingStore()
+
 text.value = (await useGetChaps([params.id.toString()]))[0].text
 </script>
 

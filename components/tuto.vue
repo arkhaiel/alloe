@@ -30,6 +30,14 @@ Vous y trouverez tous vos objets littéraires :
 - les chapitres que vous avez écrits
 </MdComp>
 
+<MdComp v-else-if="tutopage.startsWith('/ecrire')">
+# Écrire un chapitre
+Pour écrire ce chapitre, il n'y a pas grand-chose à savoir, à part peut-être ceci : 
+- Si vous mettez `*une étoile*` avant et après une phrase, un mot, ils seront transformés *en italique* à l'affichage
+- Si vous mettez `**deux étoiles**` avant et après une phrase, un mot, ils seront transformés **en gras** à l'affichage
+- Pour commencer un dialogue, écrivez deux tirets : `--` ils seront transformés en tiret cadratin, et chaque nouvelle ligne commencera automatiquement par un tiret cadratin. Si vous laissez une ligne vide, il disparaîtra : fin du dialogue.
+</MdComp>
+
 <MdComp v-else-if="tutopage === '/'">
 # Bienvenue sur alloé !
 
