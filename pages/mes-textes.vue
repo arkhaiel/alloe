@@ -65,6 +65,7 @@
             </UPopover>
           </div>
           <div class="grow align-center">{{ r.title }}</div>
+          <UButton icon="i-heroicons-trash" @click.stop="delReading(r.id)" />
         </div>
       </div>
     </UContainer>
@@ -94,6 +95,7 @@ const read = useReadingStore();
 const supabase = useSupabaseClient<Database>();
 await read.getReadings();
 await read.getRoots();
+const toast = useToast()
 
 const chaps = await useUserChaps();
 
@@ -104,6 +106,18 @@ const navToWriting = async (id) => {
 const navToReading = async (id) => {
   await navigateTo("/lire/" + id);
 };
+
+const delReading = async(id_reading) => {
+  try {
+    const {data, error} = await supabase.from('readings').delete().eq('id', id_reading)
+    await read.getReadings()
+    toast.add({ title: "Votre lecture est supprimée"})
+    if(error) throw error
+  } catch (error) {
+    console.error(error);
+    
+  }
+}
 </script>
 
 <style></style>

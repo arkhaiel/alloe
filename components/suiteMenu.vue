@@ -22,12 +22,12 @@
     <template #item="{ item }">
       <div
         class="prose static dark:prose-invert whitespace-pre-wrap overflow-clip prose-p:first:mt-0 prose-p:text-ellipsis px-4 text-justify prose-p:indent-4 max-w-none grow"
-      >
+      ><ULink :to="'/ecrire/'+item.id" class="text-sm" v-if="item.author === us.user.id">modifier mon chapitre</ULink>
         <MdComp>{{ item.content }}</MdComp>
 
         <div
-          class="w-full bg-white/75 dark:bg-gray-900/75 blur-sm absolute bottom-0 h-4"
-        />
+          class="w-full bg-white/75 dark:bg-gray-900/75 backdrop-blur-sm absolute h-4"
+        ></div>
       </div>
     </template>
 
@@ -71,7 +71,7 @@ watch(enfants, () => {
 const makeItems = () => {
   items.value = enfants.value
     ? enfants.value.map((el: any, idx: number) => {
-        return { label: `suite ${idx + 1} ${el.author === us.user.id ? '*' : ''}`, content: el.text, id: el.id };
+        return { label: `suite ${idx + 1} ${el.author === us.user.id ? '*' : ''}`, content: el.text, id: el.id, author: el.author };
       })
     : [];
   while (items.value.length < read.current.root.constrains.max_choices)
