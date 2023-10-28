@@ -1,6 +1,6 @@
 <template>
   <div>
-    <UContainer>
+    <UContainer class="grid grid-cols1">
       <div v-for="r of read.readings">
         <div class="flex flex-row gap-4 my-2 hover:bg-primary-50 rounded-lg cursor-pointer" @click="navToReading(r.id)">
           <div class="flex flex-row gap-2">
@@ -73,7 +73,7 @@
       <Logo />
     </UDivider>
 
-    <UContainer class="grid grid-cols-2 lg:grid-cols-3 gap-4">
+    <UContainer class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
       <UCard
         class="text-justify cursor-pointer hover:bg-primary-50"
         v-for="c of chaps"

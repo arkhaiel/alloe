@@ -11,7 +11,7 @@
     <div
       class="grid"
       :key="read.current ? read.current : 'grid'"
-      :class="read.current ? 'grid-cols-1' : 'grid-cols-2 gap-4'"
+      :class="read.current ? 'grid-cols-1' : 'grid-cols-1 md:grid-cols-2 gap-4'"
     >
       <UCard
         v-for="r of read.current?read.roots.filter((el: any) => el.root.id === read.current.root.id) : read.roots"
@@ -74,7 +74,7 @@
           class="prose dark:prose-invert whitespace-pre-wrap text-justify prose-p:indent-4 min-w-full"
         >
           <MdComp>{{
-            read.current ? r.root.text : r.root.text.slice(0, 500) + "..."
+            read.current ? r.root.text : r.root.text.slice(0, 300) + "..."
           }}</MdComp>
         </div>
 
