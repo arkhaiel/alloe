@@ -1,10 +1,8 @@
+import { useCounterStore } from './../stores/counter';
 import type { Database } from '~/database.types'
 
 export const findParent = (story: any, enfant: any) => {
-  if (story.length > 1) {
-    const tmp = story.find((el: any) => el.enfant === enfant);
-    if (tmp) return tmp.parent;
-  } else return null;
+  if(story.length >= 1) return story.find((el: any) => el.enfant === enfant).parent;
 };
 
 export const useGetRoots = async () => {
@@ -12,14 +10,13 @@ export const useGetRoots = async () => {
   try {
     const { data, error } = await supabase.from("root_chapters").select("*, chapters(*, parchild!parchild_parent_fkey(chapters!parchild_enfant_fkey(*)))")
     if(error) throw error   
-    console.log(data);
     
     return data.map(el => {
       const {chapters, ...root} = el
       const { parchild: enfants, ...chapter} = chapters
       return {
         enfants: enfants.map((el: any) => el.chapters),
-        root: { ...root, ...chapter },
+        root: { ...chapter, ...root },
       }
     })
   } catch (error) {
@@ -50,6 +47,19 @@ export const useGetChaps = async (story: string[]) => {
   }
 }
 
+export const useUserChaps = async () => {
+  const supabase = useSupabaseClient<Database>()
+  const us = useCounterStore()
+
+  try {
+    const {data, error} = await supabase.from("chapters").select("*").eq("author", us.user.id);
+    if(error) throw error
+    return data
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 export const useGetChildren = async(chap_id: string) => {
   const supabase = useSupabaseClient<Database>()
   try {
@@ -61,49 +71,111 @@ export const useGetChildren = async(chap_id: string) => {
   }
 }
 
-export const useNewReading = async(chap_id: string) => {
+export const useNewReading = async(chap_id: string, root_id: string) => {
   const supabase = useSupabaseClient<Database>()
   const us = useCounterStore()
   try {
-    const { data, error } = await supabase.from('readings').insert({ user: us.user.id, last_chap: chap_id }).select();
+    const { data, error } = await supabase.from('readings').insert({ user: us.user.id, last_chap: chap_id, root_chap: root_id }).select();
     if(error) throw error
     
-    return data
+    return data[0]
   } catch (error) {
     console.error(error);
   }
 }
 
-export const getFullReading = async(lastChap_id: string) => {
+export const getFullReading = async() => {
   const read = useReadingStore();
-  read.story = [lastChap_id]
+  read.storyList = [read.reading.last_chap]
 
-  read.data = await useGetStory(read.story[0])
+  read.data = await useGetStory(read.storyList[0])
 
-  read.enfants = read.data.filter((el: any) => el.parent === read.story[0]).map((el: any) => el.enfant)
+  read.enfants = read.data.filter((el: any) => el.parent === read.storyList[0]).map((el: any) => el.enfant)
 
-  while(findParent(read.data, read.story[0])) {
-    read.story.unshift(findParent(read.data, read.story[0]))
-  }
+  while(read.storyList[0] !== read.current.root.chapter)
+    read.storyList.unshift(findParent(read.data, read.storyList[0]))
 
-  read.data = await useGetChaps(read.story)
-  read.story = read.story.map((el: string) => read.data.find((el0: any) => el0.id === el))
+  read.data = await useGetChaps(read.storyList)
+  read.story = read.storyList.map((el: string) => read.data.find((el0: any) => el0.id === el))
 
   return true
 }
 
-export const prevnextChap 
-= async (child: any, reading_id: string) => {
+export const nextChap 
+= async (child: any, reading_id: string, update = false) => {
   const supabase = useSupabaseClient<Database>()
   const read = useReadingStore()
+  const toast = useToast()
   read.story.push(child)
+  read.storyList.push(child.id)
   read.enfants = await useGetChildren(child.id)
-  try {
-    const { data, error } = await supabase.from('readings').update({ last_chap: child.id }).eq('id', reading_id);
+  if(update) {
+    try {
+    const { data, error } = await supabase.from('readings').update({ last_chap: child.id, size: read.reading.size + 1 }).eq('id', reading_id).select();
     if(error) throw error
     
+    toast.add({ title: "Modifications enregistrées."})
+    read.reading = data[0]
+  } catch (error) {
+    console.error(error);
+  } } else return 'ok'
+}
+
+export const prevChap 
+= async (update = false) => {
+  const supabase = useSupabaseClient<Database>()
+  const read = useReadingStore()
+  const toast = useToast()
+  read.story.pop()
+  read.storyList.pop()
+  read.enfants = await useGetChildren(read.storyList[read.storyList.length - 1])
+  read.reading.last_chap = read.storyList[read.storyList.length - 1]
+  read.reading.size -= 1
+  if(update) {
+    try {
+    const { data, error } = await supabase.from('readings').update({ last_chap: child.id, size: read.reading.size + 1 }).eq('id', reading_id).select();
+    if(error) throw error
+    
+    toast.add({ title: "Modifications enregistrées."})
+    read.reading = data[0]
+  } catch (error) {
+    console.error(error);
+  } } else return 'ok'
+}
+
+export const useGetReadings = async () => {
+  const supabase = useSupabaseClient<Database>()
+  try {
+    const { data, error } = await supabase.from('readings').select('*');
+    if(error) throw error
     return data
   } catch (error) {
     console.error(error);
+  }
+}
+
+export const useCreateBlankChap = async(parent: string) => {
+  const supabase = useSupabaseClient<Database>()
+  try {
+    const {data: chap, error: e1} = await supabase.from('chapters').insert({}).select()
+    if(e1) throw e1
+    const {data, error: e2} = await supabase.from('parchild').insert({ parent: parent, enfant: chap[0].id})
+    if(e2) throw e2
+
+    return chap[0].id
+  } catch (error) {
+    console.error(error);    
+  }
+}
+
+export const useUpdateChap = async(text, chid) => {
+  const supabase = useSupabaseClient<Database>()
+  const toast = useToast()
+  try {
+    const {data: chap, error: e1} = await supabase.from('chapters').upsert({ id: chid, text: text }).select()
+    if(e1) throw e1
+    toast.add({ title: "Modifications enregistrées."})
+  } catch (error) {
+    console.error(error);    
   }
 }

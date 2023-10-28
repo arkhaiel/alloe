@@ -1,9 +1,9 @@
 <template>
-  <UPopover mode="hover">
+  <UPopover mode="click">
     <template #default="{ open }">
       <UButton
         color="gray"
-        variant="ghost"
+        variant="soft"
         square
         :class="[open && 'bg-gray-50 dark:bg-gray-800']"
         aria-label="Color picker"

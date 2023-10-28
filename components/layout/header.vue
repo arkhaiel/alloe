@@ -20,6 +20,10 @@ const logout = async () => {
 const items = [
   [
     {
+      label: "Profil",
+      click: async () => await navigateTo('/profil'),
+    },
+    {
       label: "Déconnexion",
       click: logout,
     },
@@ -29,30 +33,31 @@ const items = [
 
 <template>
   <div
-    class="header sticky top-0 z-50 w-full backdrop-blur grid grid-cols-3 mb-8 border-b border-gray-900/10 dark:border-gray-50/[0.06] bg-white/75 dark:bg-gray-900/75"
+    class="sticky top-0 z-50 w-full backdrop-blur grid grid-cols-3 mb-8"
   >
     <div class="flex flex-row justify-start content-center items-center gap-2 pr-2">
       <Logo :isDark="isDark" />
     </div>
-    <div class="flex flex-row justify-center items-center">
-      <UButton label="news" variant="ghost" to="/news" />
-      <UButton label="lire" variant="ghost" to="/lire" />
+    <div class="flex flex-row justify-center items-center gap-2">
+      <UButton label="lire" variant="soft" to="/lire" />
+      <UButton label="mes textes" variant="soft" to="/mes-textes" />
     </div>
 
     <div
       class="flex flex-row justify-end content-center items-center gap-0 sm:gap-2 pr-2"
     >
+    <UButton icon="i-heroicons-newspaper" color="gray" to="/news" variant="soft" />
       <LayoutColorPicker />
       <UButton
         :icon="isDark ? 'i-heroicons-moon-20-solid' : 'i-heroicons-sun-20-solid'"
         color="gray"
-        variant="ghost"
+        variant="soft"
         aria-label="Theme"
         @click="isDark = !isDark"
       />
       <UDropdown :items="items" v-if="us.user && us.userData">
         <UButton
-          color="white"
+          color="gray"
           :label="us.userData.username ? us.userData.username : 'incomplet'"
         />
       </UDropdown>
@@ -61,9 +66,6 @@ const items = [
 </template>
 
 <style scoped>
-.header {
-  border-bottom: 0px solid lightgray;
-}
 
 .titre {
   font-size: 2rem;

@@ -1,17 +1,17 @@
 <template>
   <UContainer class="mx-auto max-w-3xl">
-    <div class="flex flex-row justify-start mb-2">
+    <div class="flex flex-row justify-between mb-2">
       <UButtonGroup>
-        <UButton @click="fsize++" label="+" :disabled="fsize >= fsizee.length - 1" />
-        <UButton @click="fsize--" label="-" :disabled="fsize <= 0" />
+        <UButton class="p-2" variant="outline" @click="fsize++" icon="i-heroicons-plus" :disabled="fsize >= fsizee.length - 1" />
+        <UButton class="p-2" variant="outline" @click="fsize--" icon="i-heroicons-minus" :disabled="fsize <= 0" />
       </UButtonGroup>
       <UButtonGroup>
         <UBadge
           :color="isDial ? 'primary' : 'red'"
-          label="Mode dialogue"
-          variant="outline"
+          label="dialogue"
+          variant="subtle"
         />
-        <UBadge :color="isDial ? 'primary' : 'red'" :label="isDial ? 'ON' : 'OFF'" />
+        <UBadge variant="subtle" :color="isDial ? 'primary' : 'red'" :label="isDial ? 'ON' : 'OFF'" />
       </UButtonGroup>
     </div>
     <UTextarea
@@ -24,14 +24,14 @@
       autoresize
     />
 
-    <UButton class="mt-2" label="Enregistrer" @click="" />
+    <div class="flex justify-center items-center"><UButton class="mt-2" label="Enregistrer" @click="useUpdateChap(text, chid)" /></div>
   </UContainer>
 </template>
 
 <script lang="ts" setup>
 const props = defineProps(["data"]);
 const emit = defineEmits(["update:data"]);
-
+const chid = useRoute().params.id
 const fsize = ref(1);
 
 const text = ref(props.data);

@@ -1,20 +1,13 @@
 <template>
-  <UCard class="mb-48" >
-  <template #footer v-if="read.current">
-  <SuiteMenu />
-  </template>
   <div v-if="!loading">
-      <article class="prose dark:prose-invert whitespace-pre-wrap text-justify prose-p:indent-4 min-w-full pt-0">
+      <article class="prose dark:prose-invert whitespace-pre-wrap text-justify prose-p:indent-4 min-w-full">
       <TransitionGroup name="list">
-      <div v-for="(ch, index) of story" :key="index" class="pt-0">
-      <UDivider v-if="index !== 0" />
-        <MdComp>{{ ch.text }}</MdComp>
+      <div v-for="(ch, index) of read.storyList.slice(1)" :key="index">
+        <MdComp>{{ '\n\n---\n\n'+ch.text }}</MdComp>
       </div>
       </TransitionGroup>
       </article>
   </div>
-  <div v-else>Chargement...</div>
-  </UCard>
 </template>
 
 <script lang="ts" setup>
@@ -26,16 +19,13 @@ definePageMeta({
   }]
 })
 const read = useReadingStore();
-await read.getReadings()
-await read.getRoots()
 const loading = ref(true);
 const params = useRoute().params; //params.id est l'ID d'une LECTURE
-read.reading = read.readings.find(el => el.id === params.id)
-read.current = read.roots.find(el => el.root.id === read.reading.root_chap)
-const { story } = storeToRefs(read)
-await getFullReading()
 
-read.enfants = await useGetChaps(read.enfants)
+if(read.isStory) await getFullReading(read.readings.find(el => el.id === params.id).last_chap)
+if(!read.storyList) navigateTo('/lire')
+read.current = read.roots.find(el => el.root.chapter === read.storyListList[0])
+
 loading.value = false
 </script>
 

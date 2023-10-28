@@ -7,10 +7,6 @@ export const useCounterStore = defineStore('counter', () => {
   const user: any = useSupabaseUser()
   const supabase = useSupabaseClient<Database>()
   const userData = ref()
-  const roots = ref()
-  const data = ref()
-  const story = ref()
-  const enfants = ref()
 
   function logUser() {
     console.log(user.id);
@@ -25,7 +21,7 @@ export const useCounterStore = defineStore('counter', () => {
     userData.value = await useSaveUserData()
   }
 
-  return { count, user, waitCode, userData, supabase, logUser, getUserData, saveUserData, roots, data, story, enfants }
+  return { count, user, waitCode, userData, supabase, logUser, getUserData, saveUserData }
 })
 
 if (import.meta.hot) {
