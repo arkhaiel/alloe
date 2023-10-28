@@ -9,6 +9,16 @@ export const useReadingStore = defineStore('lecture', () => {
   const current = ref()
   const isStory = ref(false)
 
+  const quotaReading = computed(() => {
+    if(reading.value) {
+      return {
+        max: roots.value.find(el => el.root.id === reading.value.root_chap).root.constrains.max_chaps,
+        current: reading.value.size
+      }
+    } else return null
+  })
+  
+
   async function getRoots() {
     roots.value = await useGetRoots()
   }
@@ -20,7 +30,7 @@ export const useReadingStore = defineStore('lecture', () => {
   async function newReading(id_chap: string, id_root: string) {
     return await useNewReading(id_chap, id_root)
   }
-  return { roots, data, reading, readings, story, storyList, enfants, current, isStory, getRoots, getReadings, newReading }
+  return { roots, quotaReading, data, reading, readings, story, storyList, enfants, current, isStory, getRoots, getReadings, newReading }
 })
 
 if (import.meta.hot) {

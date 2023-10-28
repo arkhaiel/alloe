@@ -1,7 +1,14 @@
 <template>
-  <UCard class="mb-48" >
+  <UCard class="mb-48" :ui="{ body: { padding: 'py-0 sm:py-0' }}" >
   <template #footer v-if="read.current">
-  <SuiteMenu />
+  <SuiteMenu v-if="read.quotaReading && (read.quotaReading.current < read.quotaReading.max)" />
+  <UCard v-else-if="read.quotaReading && (read.quotaReading.current === read.quotaReading.max)">
+  <div class="flex justify-center"><Logo /></div>
+  Cette histoire est terminée ! Vous pouvez en créer une autre en retournant sur la page <UButton label="lire" variant="soft" to="/lire" />, avec le même challoé ou avec un autre, pour découvrir d'autres histoires !
+  </UCard>
+  </template>
+  <template #header>
+  <UInput v-if="!loading" v-model="read.reading.title" @keyup.enter="updateTitle()" />
   </template>
   <div v-if="!loading">
       <article class="prose dark:prose-invert whitespace-pre-wrap text-justify prose-p:indent-4 min-w-full pt-0">
@@ -25,6 +32,7 @@ definePageMeta({
     else read.isStory = true
   }]
 })
+import type { Database } from '~/database.types'
 const read = useReadingStore();
 await read.getReadings()
 await read.getRoots()
@@ -34,6 +42,21 @@ read.reading = read.readings.find(el => el.id === params.id)
 read.current = read.roots.find(el => el.root.id === read.reading.root_chap)
 const { story } = storeToRefs(read)
 await getFullReading()
+
+
+
+
+const updateTitle = async () => {
+  const supabase = useSupabaseClient<Database>()
+  const toast = useToast()
+  try {
+    const {data: reading, error: e1} = await supabase.from('readings').upsert(read.reading).select()
+    if(e1) throw e1
+    toast.add({ title: "Le titre est modifié !"})
+  } catch (error) {
+    console.error(error);    
+  }
+}
 
 read.enfants = await useGetChaps(read.enfants)
 loading.value = false

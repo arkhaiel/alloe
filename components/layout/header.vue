@@ -1,7 +1,7 @@
 <script setup>
 const colorMode = useColorMode();
 const us = useCounterStore();
-
+const read = useReadingStore()
 const isDark = computed({
   get() {
     return colorMode.value === "dark";
@@ -29,24 +29,30 @@ const items = [
     },
   ],
 ];
+
+const tutoToggle = async() => {
+  us.userData.tuto = !us.userData.tuto
+  await us.saveUserData()
+}
 </script>
 
 <template>
   <div
-    class="sticky top-0 z-50 w-full backdrop-blur grid grid-cols-3 mb-8"
+    class="sticky top-0 z-50 w-full backdrop-blur-sm grid grid-cols-1 sm:grid-cols-2 mb-8"
   >
     <div class="flex flex-row justify-start content-center items-center gap-2 pr-2">
       <Logo :isDark="isDark" />
-    </div>
-    <div class="flex flex-row justify-center items-center gap-2">
-      <UButton label="lire" variant="soft" to="/lire" />
-      <UButton label="mes textes" variant="soft" to="/mes-textes" />
+      <UButton label="lire" variant="soft" to="/lire" v-if="us.user" />
+      <UButton label="mes textes" variant="soft" to="/mes-textes" v-if="us.user" />
+      <UBadge v-if="read.quotaReading">{{ read.quotaReading.current }} / {{ read.quotaReading.max }}</UBadge>
     </div>
 
+
     <div
-      class="flex flex-row justify-end content-center items-center gap-0 sm:gap-2 pr-2"
+      class="flex flex-row justify-end content-center items-center gap-2 pr-2"
     >
-    <UButton icon="i-heroicons-newspaper" color="gray" to="/news" variant="soft" />
+    <UButton icon="i-heroicons-lifebuoy" label="tuto" color="gray" @click="tutoToggle" variant="soft" v-if="us.user" />
+    <UButton icon="i-heroicons-newspaper" label="news" color="gray" to="/news" variant="soft" />
       <LayoutColorPicker />
       <UButton
         :icon="isDark ? 'i-heroicons-moon-20-solid' : 'i-heroicons-sun-20-solid'"
@@ -61,6 +67,8 @@ const items = [
           :label="us.userData.username ? us.userData.username : 'incomplet'"
         />
       </UDropdown>
+      <UButton v-else color="gray" label="Connexion" to="/login" />
+
     </div>
   </div>
 </template>

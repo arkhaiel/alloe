@@ -2,8 +2,8 @@
   <div>
     <UContainer class="grid grid-cols1">
       <div v-for="r of read.readings">
-        <div class="flex flex-row gap-4 my-2 hover:bg-primary-50 rounded-lg cursor-pointer" @click="navToReading(r.id)">
-          <div class="flex flex-row gap-2">
+        <div class="flex flex-row items-center gap-4 my-2 hover:bg-primary-50 rounded-lg cursor-pointer" @click="navToReading(r.id)">
+          <div class="flex flex-row gap-2 items-center">
             <UPopover mode="hover">
               <UBadge size="lg" color="green" variant="subtle" class="cursor-help"
                 ><UIcon name="i-heroicons-arrow-down" />{{
@@ -64,13 +64,12 @@
               </template>
             </UPopover>
           </div>
-          <div class="grow">{{ read.roots.find((el) => el.root.id === r.root_chap).root.title }}</div>
+          <div class="grow align-center">{{ r.title }}</div>
         </div>
       </div>
     </UContainer>
 
     <UDivider class="my-8">
-      <Logo />
     </UDivider>
 
     <UContainer class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">

@@ -71,11 +71,11 @@ export const useGetChildren = async(chap_id: string) => {
   }
 }
 
-export const useNewReading = async(chap_id: string, root_id: string) => {
+export const useNewReading = async(chap_id: string, root: any) => {
   const supabase = useSupabaseClient<Database>()
   const us = useCounterStore()
   try {
-    const { data, error } = await supabase.from('readings').insert({ user: us.user.id, last_chap: chap_id, root_chap: root_id }).select();
+    const { data, error } = await supabase.from('readings').insert({ user: us.user.id, last_chap: chap_id, root_chap: root.id, title: root.title }).select();
     if(error) throw error
     
     return data[0]
@@ -114,7 +114,7 @@ export const nextChap
     const { data, error } = await supabase.from('readings').update({ last_chap: child.id, size: read.reading.size + 1 }).eq('id', reading_id).select();
     if(error) throw error
     
-    toast.add({ title: "Modifications enregistrées."})
+    toast.add({ title: "Chapitre ajouté à votre histoire"})
     read.reading = data[0]
   } catch (error) {
     console.error(error);
@@ -136,7 +136,7 @@ export const prevChap
     const { data, error } = await supabase.from('readings').update({ last_chap: child.id, size: read.reading.size + 1 }).eq('id', reading_id).select();
     if(error) throw error
     
-    toast.add({ title: "Modifications enregistrées."})
+    toast.add({ title: "Histoire mise à jour"})
     read.reading = data[0]
   } catch (error) {
     console.error(error);

@@ -68,5 +68,8 @@ export default defineNuxtConfig({
         callback: '/confirm',
         exclude: ['/', '/news/*', '/news', '/cgu', '/cgu/*', '/lire', '/lire/*']
       }
+    },
+    ui: {
+        global: true
     }
   })

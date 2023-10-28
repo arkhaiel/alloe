@@ -26,7 +26,7 @@ const validateOTP = async () => {
     if (error) throw error;
     us.user = data.user;
     await us.getUserData();
-    if (route.redirectedFrom) await navigateTo(route.redirectedFrom.fullPath);
+    await navigateTo('/lire')
   } catch (error) {
     console.error(error);
   }
@@ -35,7 +35,7 @@ const validateOTP = async () => {
 
 <template>
   <UCard>
-    <p class="mb-2">Recopier le code reçu :</p>
+    <p class="mb-2">Recopier le code reçu par mail (regardez dans vos spams) :</p>
     <UInput
       v-model="OTPcode"
       placeholder="------"

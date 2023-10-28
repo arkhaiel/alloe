@@ -8,7 +8,7 @@
   />
   <UTabs
     orientation="vertical"
-    v-if="items"
+    v-if="items "
     :items="items"
     v-model="selected"
     :key="enfants[0]"
@@ -44,6 +44,7 @@
   <UButton
     v-if="items"
     icon="i-heroicons-arrow-down"
+    :loading="working"
     label="Continuer avec cette suite"
     variant="soft"
     @click="addSuite(enfants.find((el) => el.id === items[selected].id))"
@@ -55,9 +56,10 @@
 const read = useReadingStore();
 const selected = ref(0);
 const parid = useRoute().params.id;
-const toast = useToast();
+const working = ref(false)
 const items = ref();
 const { storyList, enfants } = storeToRefs(read);
+
 
 watch(enfants, () => {
   items.value = [];
@@ -83,8 +85,9 @@ const newChap = async (id_parent: string) => {
 };
 
 const addSuite = async (item: any) => {
+  working.value = true
   if (useRoute().path === "/lire") {
-    read.reading = await read.newReading(item.id, read.current.root.id);
+    read.reading = await read.newReading(item.id, read.current.root);
 
     if (read.reading) {
       read.story = [read.current.root];
@@ -95,12 +98,13 @@ const addSuite = async (item: any) => {
       await navigateTo("/lire/" + read.reading.id);
     }
   } else {
-    nextChap(
+    await nextChap(
       read.enfants.find((el) => el.id === item.id),
       parid.toString(),
       true
     );
   }
+  working.value = false
 };
 </script>
 
