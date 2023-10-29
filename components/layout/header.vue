@@ -51,19 +51,19 @@ const tutoToggle = async() => {
     <div
       class="flex flex-row justify-end content-center items-center gap-2 pr-2"
     >
-    <UButton icon="i-heroicons-lifebuoy" label="tuto" color="gray" @click="tutoToggle" variant="soft" v-if="us.user" />
-    <UButton icon="i-heroicons-newspaper" label="news" color="gray" to="/news" variant="soft" />
+    <UButton icon="i-heroicons-lifebuoy" label="tuto" color="primary" @click="tutoToggle" variant="soft" v-if="us.user" />
+    <UButton icon="i-heroicons-newspaper" label="news" color="primary" to="/news" variant="soft" />
       <LayoutColorPicker />
       <UButton
         :icon="isDark ? 'i-heroicons-moon-20-solid' : 'i-heroicons-sun-20-solid'"
-        color="gray"
-        variant="soft"
+        color="primary"
+        variant="outline"
         aria-label="Theme"
         @click="isDark = !isDark"
       />
       <UDropdown :items="items" v-if="us.user && us.userData">
         <UButton
-          color="gray"
+          color="primary"
           :label="us.userData.username ? us.userData.username : 'incomplet'"
         />
       </UDropdown>

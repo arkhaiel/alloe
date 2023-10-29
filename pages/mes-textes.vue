@@ -3,7 +3,7 @@
     <UContainer class="grid grid-cols1">
     <div v-if="read.readings.length > 0">
       <div v-for="r of read.readings">
-        <div class="flex flex-row items-center gap-4 my-2 hover:bg-primary-50 rounded-lg cursor-pointer" @click="navToReading(r.id)">
+        <div class="flex flex-row items-center gap-4 my-2 hover:bg-primary-50 dark:hover:bg-primary-900 rounded-lg cursor-pointer" @click="navToReading(r.id)">
           <div class="flex flex-row gap-2 items-center">
             <UPopover mode="hover">
               <UBadge size="lg" color="green" variant="subtle" class="cursor-help"

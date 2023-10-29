@@ -2,8 +2,8 @@
   <UPopover mode="click">
     <template #default="{ open }">
       <UButton
-        color="gray"
-        variant="soft"
+        color="primary"
+        variant="outline"
         square
         :class="[open && 'bg-gray-50 dark:bg-gray-800']"
         aria-label="Color picker"
