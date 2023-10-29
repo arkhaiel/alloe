@@ -1,5 +1,5 @@
 <template>
-  <UCard>
+  <UCard :ui="{ body: 'p-0' }">
     <UTable :rows="rows" :columns="cols" :sort="{ column: 'date', direction: 'desc' }">
       <template #date-data="{ row }">{{
         useDateFormat(row.date, "DD-MM-YYYY").value.replaceAll("-", "/")

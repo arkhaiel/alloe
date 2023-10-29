@@ -26,7 +26,7 @@ const validateOTP = async () => {
     if (error) throw error;
     us.user = data.user;
     await us.getUserData();
-    await navigateTo('/lire')
+    await navigateTo('/mes-textes')
   } catch (error) {
     console.error(error);
   }

@@ -1,6 +1,7 @@
 <template>
   <div>
     <UContainer class="grid grid-cols1">
+    <div v-if="read.readings.length > 0">
       <div v-for="r of read.readings">
         <div class="flex flex-row items-center gap-4 my-2 hover:bg-primary-50 rounded-lg cursor-pointer" @click="navToReading(r.id)">
           <div class="flex flex-row gap-2 items-center">
@@ -68,6 +69,10 @@
           <UButton icon="i-heroicons-trash" @click.stop="delReading(r.id)" />
         </div>
       </div>
+    </div>
+    <UCard v-else>
+    Vous n'avez aucune lecture enregistrée. Pour créer une nouvelle lecture, rendez-vous sur la page <UButton label="lire" to="/lire" variant="soft" />, puis choisissez un challoé !
+    </UCard>
     </UContainer>
 
     <UDivider class="my-8">
