@@ -66,7 +66,7 @@
             </UPopover>
           </div>
           <div class="grow align-center order-last sm:order-none min-w-full sm:min-w-0">{{ r.title }}</div>
-          <UButton class="sm:order-last" icon="i-heroicons-trash" @click.stop="delReading(r.id)" />
+          <UButton class="sm:order-last" color="red" variant="ghost" icon="i-heroicons-trash" @click.stop="delReading(r.id)" />
         </div>
       </div>
     </div>
