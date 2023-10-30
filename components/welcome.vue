@@ -11,7 +11,7 @@ const us = useCounterStore();
 <template>
   <UCard v-if="us.userData">
     <template #header>
-      <div class="prose dark:prose-invert prose-h2:m-0 flex flex-row justify-between">
+      <div class="prose dark:prose-invert max-w-full prose-h2:m-0 flex flex-row justify-between">
         <h2>Bienvenue {{ us.userData.username }} !</h2>
         <LayoutColorPicker />
       </div>

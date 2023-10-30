@@ -25,7 +25,7 @@ const dispTuto = computed(() => {
 
 <template>
   <div>
-    <UContainer class="min-h-[90vh]">
+    <UContainer class="min-h-[100vh]">
     <LayoutHeader />
     <Tuto :tutopage="useRoute().path" v-if="dispTuto" />
       <NuxtPage />
