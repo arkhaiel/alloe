@@ -1,5 +1,5 @@
 <template>
-  <UContainer class="mx-auto max-w-3xl">
+  <UContainer class="mx-auto max-w-5xl">
     <div class="flex flex-row justify-between mb-2">
       <UButtonGroup>
         <UButton class="p-2" variant="outline" @click="fsize++" icon="i-heroicons-plus" :disabled="fsize >= fsizee.length - 1" />
