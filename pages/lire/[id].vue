@@ -14,8 +14,7 @@
       <article class="prose dark:prose-invert whitespace-pre-wrap text-justify prose-p:indent-4 min-w-full pt-0">
       <TransitionGroup name="list">
       <div v-for="(ch, index) of story" :key="index" class="pt-0">
-      <UDivider v-if="index !== 0" />
-        <MdComp>{{ ch.text }}</MdComp>
+<UDivider v-if="index !== 0" /><MdComp>{{ ch.text }}</MdComp>
       </div>
       </TransitionGroup>
       </article>
