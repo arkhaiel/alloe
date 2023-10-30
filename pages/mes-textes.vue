@@ -78,16 +78,17 @@
     <UDivider class="my-8">
     </UDivider>
     <p>Les chapitres ci-dessous représentent vos chapitres créés. Si vous les avez créés par mégarde, modifiez leur contenu en "à supprimer". Ils seront supprimés sous 24h.</p>
-    <UContainer class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    <UContainer class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 my-4">
       <UCard
         class="text-justify cursor-pointer hover:bg-primary-50"
+        :ui="{ body: { padding: 'p-2 sm:p-2'}}"
         v-for="c of chaps"
         @click="navToWriting(c.id)"
       >
         <div
-          class="prose dark:prose-invert whitespace-pre-wrap overflow-clip prose-p:first:mt-0 prose-p:text-ellipsis px-0 text-justify prose-p:indent-4"
+          class="prose dark:prose-invert whitespace-pre-wrap overflow-clip prose-p:first:mt-0 prose-p:text-ellipsis px-0 text-justify prose-p:indent-4 text-[0.92rem]/6"
         >
-          <MdComp>{{ c.text ? c.text.slice(0, 200) : "vide" }}</MdComp>
+          <MdComp>{{ c.text ? c.text.slice(0, 200)+'...' : "vide" }}</MdComp>
         </div>
       </UCard>
     </UContainer>
