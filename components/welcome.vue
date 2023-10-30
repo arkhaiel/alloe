@@ -11,13 +11,9 @@ const us = useCounterStore();
 <template>
   <UCard v-if="us.userData">
     <template #header>
-      <div class="prose dark:prose-invert">
+      <div class="prose dark:prose-invert prose-h2:m-0 flex flex-row justify-between">
         <h2>Bienvenue {{ us.userData.username }} !</h2>
-        <p>
-          En attendant le jour J, il est possible de personnaliser son compte. Pour
-          l'instant, deux informations : le pseudo auquel seront associés tes chapitres et
-          la bio que tu voudrais partager avec les autres utilisateurs.
-        </p>
+        <LayoutColorPicker />
       </div>
     </template>
 

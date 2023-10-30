@@ -21,6 +21,9 @@
   </div>
   <div v-else>Chargement...</div>
   </UCard>
+  <div class="fixed bottom-2 m-auto flex flex-row justify-center w-screen">
+  <UBadge size="lg" v-if="read.quotaReading">{{ read.quotaReading.current }} / {{ read.quotaReading.max }}</UBadge>
+</div>
 </template>
 
 <script lang="ts" setup>

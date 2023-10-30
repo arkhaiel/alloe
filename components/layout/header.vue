@@ -44,7 +44,6 @@ const tutoToggle = async() => {
       <Logo :isDark="isDark" />
       <UButton label="lire" variant="soft" to="/lire" v-if="us.user" />
       <UButton label="mes textes" variant="soft" to="/mes-textes" v-if="us.user" />
-      <UBadge v-if="read.quotaReading">{{ read.quotaReading.current }} / {{ read.quotaReading.max }}</UBadge>
     </div>
 
 
@@ -53,7 +52,6 @@ const tutoToggle = async() => {
     >
     <UButton icon="i-heroicons-lifebuoy" label="tuto" color="primary" @click="tutoToggle" variant="soft" v-if="us.user" />
     <UButton icon="i-heroicons-newspaper" label="news" color="primary" to="/news" variant="soft" />
-      <LayoutColorPicker />
       <UButton
         :icon="isDark ? 'i-heroicons-moon-20-solid' : 'i-heroicons-sun-20-solid'"
         color="primary"
