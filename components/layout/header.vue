@@ -1,7 +1,6 @@
 <script setup>
 const colorMode = useColorMode();
 const us = useCounterStore();
-const read = useReadingStore()
 const isDark = computed({
   get() {
     return colorMode.value === "dark";
@@ -51,7 +50,7 @@ const tutoToggle = async() => {
       class="flex flex-row order-2 sm:order-3 justify-end content-center items-center gap-2 pr-2"
     >
     <UButton icon="i-heroicons-newspaper" label="news" color="primary" to="/news" variant="soft" />
-    <UButton icon="i-heroicons-lifebuoy" color="primary" @click="tutoToggle" variant="soft" v-if="us.user" />
+    <UButton icon="i-heroicons-lifebuoy" :color="us.userData.tuto ? 'primary':'cool'" @click="tutoToggle" variant="soft" v-if="us.user" />
       <UButton
         :icon="isDark ? 'i-heroicons-moon-20-solid' : 'i-heroicons-sun-20-solid'"
         color="primary"
