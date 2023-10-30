@@ -3,7 +3,7 @@
     <UContainer class="grid grid-cols1">
     <div v-if="read.readings.length > 0">
       <div v-for="r of read.readings">
-        <div class="flex flex-row items-center gap-4 my-2 hover:bg-primary-50 dark:hover:bg-primary-900 rounded-lg cursor-pointer" @click="navToReading(r.id)">
+        <div class="flex flex-row flex-wrap justify-between items-center gap-1 sm:gap-4 my-4 hover:bg-primary-50 dark:hover:bg-primary-900 rounded-lg cursor-pointer" @click="navToReading(r.id)">
           <div class="flex flex-row gap-2 items-center">
             <UPopover mode="hover">
               <UBadge size="lg" color="green" variant="subtle" class="cursor-help"
@@ -65,8 +65,8 @@
               </template>
             </UPopover>
           </div>
-          <div class="grow align-center">{{ r.title }}</div>
-          <UButton icon="i-heroicons-trash" @click.stop="delReading(r.id)" />
+          <div class="grow align-center order-last sm:order-none min-w-full sm:min-w-0">{{ r.title }}</div>
+          <UButton class="sm:order-last" icon="i-heroicons-trash" @click.stop="delReading(r.id)" />
         </div>
       </div>
     </div>
