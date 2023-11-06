@@ -77,8 +77,8 @@
 
     <UDivider class="my-8">
     </UDivider>
-    <p>Les chapitres ci-dessous représentent vos chapitres créés. Si vous les avez créés par mégarde, modifiez leur contenu en "à supprimer". Ils seront supprimés sous 24h.</p>
     <UContainer class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 my-4">
+      <p class="col-span-full">Les chapitres ci-dessous représentent vos chapitres créés. Si vous les avez créés par mégarde, modifiez leur contenu en "à supprimer". Ils seront supprimés sous 24h.</p>
       <UCard
         class="text-justify cursor-pointer hover:bg-primary-50"
         :ui="{ body: { padding: 'p-2 sm:p-2'}}"
