@@ -54,7 +54,7 @@ const links = [{
     </template>
     <template #right>
     <UButton icon="i-heroicons-lifebuoy" :color="us.userData.tuto ? 'primary':'black'" @click="tutoToggle" variant="soft" v-if="us.user" />
-      <UColorModeToggle />
+      <UColorModeButton />
       <UDropdown :items="items" v-if="us.user && us.userData">
         <UButton
           color="primary"
