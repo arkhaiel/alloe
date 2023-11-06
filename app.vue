@@ -25,11 +25,17 @@ const dispTuto = computed(() => {
 
 <template>
   <div>
-    <UContainer class="min-h-[100vh]">
     <LayoutHeader />
+    <UMain>
+    <UContainer>
+    <UPage>
     <Tuto :tutopage="useRoute().path" v-if="dispTuto" />
+    <UPageBody>
       <NuxtPage />
+    </UPageBody>
+    </UPage>
     </UContainer>
+    </UMain>
     <LayoutFooter />
     <UNotifications />
   </div>

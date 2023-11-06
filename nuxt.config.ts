@@ -1,5 +1,6 @@
 export default defineNuxtConfig({
     devtools: { enabled: false },
+    extends: ['@nuxt/ui-pro'],
     app: {
         head: {
             meta: [{
@@ -27,10 +28,10 @@ export default defineNuxtConfig({
         }
     },
     modules: [
+        '@nuxt/content',
         '@nuxt/ui',
         '@nuxtjs/supabase',
         '@vueuse/nuxt',
-        '@nuxt/content',
         '@pinia/nuxt',
         '@nuxtjs/mdc'
     ],
