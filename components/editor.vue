@@ -1,5 +1,5 @@
 <template>
-  <UContainer class="mx-auto max-w-5xl">
+  <div class="mx-auto">
     <div class="flex flex-row justify-between mb-2">
       <UButtonGroup>
         <UButton class="p-2" variant="outline" @click="fsize++" icon="i-heroicons-plus" :disabled="fsize >= fsizee.length - 1" />
@@ -25,7 +25,7 @@
     />
 
     <div class="flex justify-center items-center"><UButton class="mt-2" label="Enregistrer" @click="useUpdateChap(text, chid)" /></div>
-  </UContainer>
+  </div>
 </template>
 
 <script lang="ts" setup>
