@@ -2,7 +2,9 @@ import { useCounterStore } from './../stores/counter';
 import type { Database } from '~/database.types'
 
 export const findParent = (story: any, enfant: any) => {
-  if(story.length >= 1) return story.find((el: any) => el.enfant === enfant).parent;
+  if(story.length >= 1) {
+    return story.find((el: any) => el.enfant === enfant) ? story.find((el: any) => el.enfant === enfant).parent : null
+  } 
 };
 
 export const useGetRoots = async () => {
