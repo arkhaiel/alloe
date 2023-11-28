@@ -1,3 +1,5 @@
+import { resolve } from 'pathe'
+
 export default defineNuxtConfig({
     devtools: { enabled: false },
     extends: ['@nuxt/ui-pro'],
@@ -52,15 +54,7 @@ export default defineNuxtConfig({
             injectPage: false
         },
         navigation: {
-            fields: ['date']
-        },
-        sources: {
-            // overwrite default source AKA `content` directory
-            content: {
-                driver: 'fs',
-                prefix: '/news', // All contents inside this source will be prefixed with `/docs`
-                base: 'content'
-            }
+            fields: ['date', 'version']
         },
     },
     supabase: {

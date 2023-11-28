@@ -8,6 +8,12 @@ export const useAppState = () => {
   })
 }
 
+export const tutoToggle = async() => {
+  const us = useCounterStore()
+  us.userData.tuto = !us.userData.tuto
+  await us.saveUserData()
+}
+
 // export const downloadImage = async () => {
 //   try {
 //     const supabase = useSupabaseClient()

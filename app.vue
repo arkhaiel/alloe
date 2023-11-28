@@ -18,7 +18,7 @@ watch(page, () => {
 });
 
 const dispTuto = computed(() => {
-  if(useRoute().path === '/') return true
+  if(useRoute().path === '/') return false
   if(us.user && us.userData) return us.userData.tuto
 })
 </script>

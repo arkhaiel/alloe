@@ -29,10 +29,7 @@ const items = [
   ],
 ];
 
-const tutoToggle = async() => {
-  us.userData.tuto = !us.userData.tuto
-  await us.saveUserData()
-}
+
 
 const links = [{
   label: "lire",
@@ -48,13 +45,15 @@ const links = [{
 </script>
 
 <template>
-  <UHeader :links="links">
+  <UHeader :links="links" :to="us.user ? '/mes-textes' : '/'">
     <template #logo>
       <Logo :isDark="isDark" />
     </template>
     <template #right>
-    <UButton icon="i-heroicons-lifebuoy" :color="us.userData.tuto ? 'primary':'black'" @click="tutoToggle" variant="soft" v-if="us.user" />
+    <div class="hidden md:flex">
+      <UButton icon="i-heroicons-lifebuoy" :color="us.userData.tuto ? 'primary':'black'" @click="tutoToggle" variant="soft" v-if="us.user" />
       <UColorModeButton />
+    </div>
       <UDropdown :items="items" v-if="us.user && us.userData">
         <UButton
           color="primary"

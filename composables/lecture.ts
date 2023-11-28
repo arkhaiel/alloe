@@ -41,9 +41,14 @@ export const useGetStory = async (id: string) => {
 export const useGetChaps = async (story: string[]) => {
   const supabase = useSupabaseClient<Database>()
   try {
-    const {data, error} = await supabase.from("chapters").select("*").in("id", story);
+    const {data, error} = await supabase.from("chapters").select("*, user_view(username))").in("id", story);
     if(error) throw error
-    return data
+    return data.map(el => {
+      return {
+        ...el,
+        author: el.user_view.username
+      }
+    })
   } catch (error) {
     console.error(error);
   }
@@ -177,6 +182,17 @@ export const useUpdateChap = async(text, chid) => {
     const {data: chap, error: e1} = await supabase.from('chapters').upsert({ id: chid, text: text }).select()
     if(e1) throw e1
     toast.add({ title: "Modifications enregistrées."})
+  } catch (error) {
+    console.error(error);    
+  }
+}
+
+export const useGetUsers = async() => {
+  const supabase = useSupabaseClient<Database>()
+  try {
+    const {data: users, error: e1} = await supabase.from('user_view').select()
+    if(e1) throw e1
+    return users
   } catch (error) {
     console.error(error);    
   }

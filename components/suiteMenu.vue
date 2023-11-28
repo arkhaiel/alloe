@@ -6,7 +6,6 @@
     @click="prevChap()"
     v-if="storyList.length > 1"
   />
-  <p class="italic">la présence d'une * signifie que vous êtes l'auteur de ce chapitre</p>
   <UTabs
     orientation="vertical"
     v-if="items "
@@ -16,16 +15,17 @@
     :ui="{
       wrapper: 'flex items-center gap-0 md:gap-4 h-[12rem] space-y-0',
       list: { width: 'w-48',  },
-      container: 'h-full m-0 px-4 overflow-clip self-start',
+      container: 'h-full m-0 px-4 overflow-y-scroll self-start',
+      base: 'h-full'
     }"
   >
     <template #item="{ item }">
-      <ULink :to="'/ecrire/'+item.id" class="text-sm" v-if="item.author === us.user.id">modifier mon chapitre</ULink>
+    <div class="flex flex-row justify-end">
+      <UButton variant="ghost" :to="'/ecrire/'+item.id" size="xs" v-if="item.author === us.user.id">modifier mon chapitre</UButton>
+    </div>
       <div
-        class="prose static dark:prose-invert whitespace-pre-wrap overflow-clip pt-2 prose-p:first:mt-0 prose-p:text-ellipsis prose-p:mb-2 text-[0.92rem]/6 px-0 sm:px-4 text-justify prose-p:indent-4 max-w-none grow"
-      ><MdComp>{{ item.content }}</MdComp><div
-          class="w-full bg-white/75 dark:bg-gray-900/75 backdrop-blur-sm absolute bottom-0 h-4 "
-        ></div>
+        class="prose static dark:prose-invert whitespace-pre-wrap pt-0 prose-p:first:m-0 text-[0.92rem]/6 px-0 sm:px-4 text-justify prose-p:indent-4 max-w-none grow"
+      ><MdComp>{{ item.content }}</MdComp>
       </div>
     </template>
 

@@ -1,6 +1,7 @@
 <template>
   <UCard class="mb-48" :ui="{ body: { padding: 'py-0 sm:py-0' }}" >
   <template #footer v-if="read.current">
+  <a id="suitemenu" />
   <SuiteMenu v-if="read.quotaReading && (read.quotaReading.current < read.quotaReading.max)" />
   <UCard v-else-if="read.quotaReading && (read.quotaReading.current === read.quotaReading.max)">
   <div class="flex justify-center"><Logo /></div>
@@ -13,16 +14,20 @@
   <div v-if="!loading">
       <article class="prose dark:prose-invert whitespace-pre-wrap text-justify prose-p:indent-4 min-w-full pt-0">
       <TransitionGroup name="list">
-      <div v-for="(ch, index) of story" :key="index" class="pt-0">
+      <div v-for="(ch, index) of story" :key="index" class="relative pt-0 prose-p:last:mb-0">
+      <a :id="`chapitre${index}`" class="absolute -top-[calc(var(--header-height))]" />
 <UDivider v-if="index !== 0" /><MdComp>{{ ch.text.replaceAll('\n', '\n\n') }}</MdComp>
+        <div class="absolute bottom-0 right-0 text-gray-500 dark:text-gray-400 italic">{{ ch.author }}</div>
       </div>
       </TransitionGroup>
       </article>
   </div>
   <div v-else>Chargement...</div>
   </UCard>
-  <div class="fixed bottom-2 m-auto flex flex-row justify-center w-screen">
+  <div class="fixed bottom-2 left-0 flex flex-row justify-center w-screen">
+  <UDropdown :items="chapsNav">
   <UBadge size="lg" v-if="read.quotaReading">{{ read.quotaReading.current }} / {{ read.quotaReading.max }}</UBadge>
+  </UDropdown>
 </div>
 </template>
 
@@ -36,6 +41,7 @@ definePageMeta({
 })
 import type { Database } from '~/database.types'
 const read = useReadingStore();
+await read.getUsers()
 await read.getReadings()
 await read.getRoots()
 const loading = ref(true);
@@ -44,9 +50,6 @@ read.reading = read.readings.find(el => el.id === params.id)
 read.current = read.roots.find(el => el.root.id === read.reading.root_chap)
 const { story } = storeToRefs(read)
 await getFullReading()
-
-
-
 
 const updateTitle = async () => {
   const supabase = useSupabaseClient<Database>()
@@ -62,6 +65,18 @@ const updateTitle = async () => {
 
 read.enfants = await useGetChaps(read.enfants)
 loading.value = false
+
+const chapsNav = computed(() => {
+  return story.value.map((el, index) => {
+    return [{
+      label: `chapitre ${index}`,
+      to: `#chapitre${index}`
+    }]
+  }).concat([[{
+    label: 'suites', 
+    to: '#suitemenu'
+  }]])
+})
 </script>
 
 <style scoped>

@@ -6,6 +6,11 @@
         <UButton class="p-2" variant="outline" @click="fsize--" icon="i-heroicons-minus" :disabled="fsize <= 0" />
       </UButtonGroup>
       <UButtonGroup>
+      <UBadge variant="solid" :color="maxReached ? 'red' : 'primary'" :label="text.length" />
+      <UBadge variant="solid" :color="maxReached ? 'red' : 'primary'" label="/" />
+      <UBadge variant="solid" :color="maxReached ? 'red' : 'primary'" :label="maxChars" />
+      </UButtonGroup>
+      <UButtonGroup>
         <UBadge
           :color="isDial ? 'primary' : 'red'"
           label="dialogue"
@@ -19,17 +24,20 @@
       :size="'t' + fsizee[fsize]"
       ref="editor"
       id="editor"
+      :rows="30"
       v-model="text"
       @keyup.enter="newline"
-      autoresize
+      @keypress="stopinput"
+      resize
     />
 
+    <div class="text-center" v-if="maxReached"><span class="text-red-500 font-semibold">La limite de caractères définie pour ce challoé est atteinte !</span></div>
     <div class="flex justify-center items-center"><UButton class="mt-2" label="Enregistrer" @click="useUpdateChap(text, chid)" /></div>
   </div>
 </template>
 
 <script lang="ts" setup>
-const props = defineProps(["data"]);
+const props = defineProps(["data", "maxChars"]);
 const emit = defineEmits(["update:data"]);
 const chid = useRoute().params.id
 const fsize = ref(1);
@@ -43,6 +51,10 @@ const fsizee = ["xs", "sm", "md", "lg", "xl"];
 onMounted(() => {
   textarea.value = editor.value.$refs.textarea;
 });
+
+const maxReached = computed(() => {
+  return text.value.length >= props.maxChars
+})
 
 const sstart = ref(); // correspond à SelectionStart
 const ssend = ref(); // correspond à SelectionEnd (en général les deux sont égaux quand on tape du texte au clavier)
@@ -86,7 +98,11 @@ const newline = () => {
   }
 };
 
-watch(text, () => {
+const stopinput = (event) => {
+  if(text.value.length >= props.maxChars) event.preventDefault();
+}
+
+watch(text, (newVal, oldVal) => {
   // cette fonction est en charge de maintenir le suivi de la position du curseur
   const doc = textarea.value;
   if (doc) {
@@ -94,6 +110,8 @@ watch(text, () => {
     ssend.value = doc.selectionEnd;
   }
 
+  if(newVal.length > props.maxChars) text.value = oldVal
+  
   text.value = text.value.replace("-- ", "— ");
   emit("update:data", text.value);
 });

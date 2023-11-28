@@ -1,5 +1,5 @@
 <template>
-  <MDCRenderer :body="ast.body" :data="ast.data"/>
+  <MDCRenderer :body="ast.body" :data="ast.data" :prose="true" :tag="false" />
 </template>
 
 <script setup>

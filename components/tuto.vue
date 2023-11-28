@@ -38,7 +38,7 @@ Pour écrire ce chapitre, il n'y a pas grand-chose à savoir, à part peut-être
 - Pour commencer un dialogue, écrivez deux tirets : `--` ils seront transformés en tiret cadratin, et chaque nouvelle ligne commencera automatiquement par un tiret cadratin. Si vous laissez une ligne vide, il disparaîtra : fin du dialogue.
 </MdComp>
 
-<MdComp v-else-if="tutopage === '/'">
+<MdComp v-else-if="false">
 # Bienvenue sur alloé !
 
 **28 octobre** est la date de lancement de notre alloé 2023 !

@@ -1,0 +1,11 @@
+navigation: false
+hero:
+  title: <span class="text-primary">alloé</span>
+  description: alloé est un site d'écriture collaborative et participative basé sur le principe des "histoires dont vous êtes le héros". <br> Commencez la lecture d'une histoire, et choisissez le chapitre suivant ! <br> Aucun chapitre ne vous convient ? Écrivez le vôtre !
+features:
+  - title: contraintes d'écriture
+    description: Des contraintes sont proposées pour stimuler la créativité et permettre de s'amuser en écrivant.
+  - title: orienter l'histoire
+    description: La lecture d'une histoire est une expérience sans cesse renouvelée, avec des suites alternatives à chaque chapitre.
+  - title: écrire la suite
+    description: Chaque chapitre écrit par un alloéen peut être continué par les autres. Vous pouvez écrire votre propre suite !

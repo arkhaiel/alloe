@@ -1,5 +1,8 @@
 export default defineAppConfig({     
     ui: {
+        header: {
+            center: 'flex'
+        },
         textarea: {
             size: {
                 txs: 'text-xs',

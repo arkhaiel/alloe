@@ -8,6 +8,7 @@ export const useReadingStore = defineStore('lecture', () => {
   const enfants = ref()
   const current = ref()
   const isStory = ref(false)
+  const users = ref()
 
   const quotaReading = computed(() => {
     if(reading.value) {
@@ -20,7 +21,11 @@ export const useReadingStore = defineStore('lecture', () => {
   
 
   async function getRoots() {
-    roots.value = await useGetRoots()
+    if(!roots.value) roots.value = await useGetRoots()
+  }
+
+  async function getUsers() {
+    users.value = await useGetUsers()
   }
 
   async function getReadings() {
@@ -30,7 +35,7 @@ export const useReadingStore = defineStore('lecture', () => {
   async function newReading(id_chap: string, id_root: string) {
     return await useNewReading(id_chap, id_root)
   }
-  return { roots, quotaReading, data, reading, readings, story, storyList, enfants, current, isStory, getRoots, getReadings, newReading }
+  return { roots, users, quotaReading, data, reading, readings, story, storyList, enfants, current, isStory, getUsers, getRoots, getReadings, newReading }
 })
 
 if (import.meta.hot) {

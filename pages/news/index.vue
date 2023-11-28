@@ -24,7 +24,7 @@ definePageMeta({
 });
 
 const { navigation } = useContent();
-const rows = navigation.value.filter((el) => !el.children);
+const rows = navigation.value.find(el => el._path === '/news').children
 
 const cols = [
   {
