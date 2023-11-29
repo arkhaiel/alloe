@@ -192,7 +192,10 @@ export const useGetUsers = async() => {
   try {
     const {data: users, error: e1} = await supabase.from('user_view').select()
     if(e1) throw e1
-    return users
+    return users.reduce((acc, obj) => {
+      acc[obj.id] = obj.username
+      return acc
+    }, {})
   } catch (error) {
     console.error(error);    
   }
