@@ -32,6 +32,7 @@
 </template>
 
 <script lang="ts" setup>
+// TODO simplifier cette page pour obtenir simplement l'obtention d'une histoire depuis l'ID : fusionner avec l'index ?
 definePageMeta({
   middleware: [function(to, from) {
     const read = useReadingStore();

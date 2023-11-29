@@ -114,7 +114,8 @@
 //     if(to.path !== '/lire') return navigateTo('/lire')
 //   }]
 // })
-
+// TODO gros refactor 
+// TODO "où suis-je ?" > projet d'une vue graphique de l'histoire
 const read = useReadingStore();
 await read.getRoots();
 await read.getUsers();
