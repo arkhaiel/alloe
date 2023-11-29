@@ -122,7 +122,7 @@ const lecture = (r: any) => {
 const goback = () => {
   read.storyList = [];
   read.enfants = [];
-  read.current = "";
+  read.current = null;
 };
 
 const new_reading = async (child: any, root: string) => {

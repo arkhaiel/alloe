@@ -51,7 +51,7 @@ const links = [{
     </template>
     <template #right>
     <div class="hidden md:flex">
-      <UButton icon="i-heroicons-lifebuoy" :color="us.userData.tuto ? 'primary':'black'" @click="tutoToggle" variant="soft" v-if="us.user" />
+      <UButton icon="i-heroicons-lifebuoy" :color="us.userData.tuto ? 'primary':'black'" @click="tutoToggle" variant="soft" v-if="us.user && us.userData" />
       <UColorModeButton />
     </div>
       <UDropdown :items="items" v-if="us.user && us.userData">

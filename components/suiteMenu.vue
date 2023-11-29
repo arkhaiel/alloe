@@ -73,7 +73,7 @@ const makeItems = () => {
         return { label: `suite ${idx + 1} ${el.author === us.user.id ? '*' : ''}`, content: el.text, id: el.id, author: el.author };
       })
     : [];
-  while (items.value.length < read.current.root.constrains.max_choices)
+  while (items.value.length < read.current?.root.constrains.max_choices)
     items.value.push({ label: "vide", content: "à remplir", slot: "vide" });
   return items.value;
 };
