@@ -8,7 +8,7 @@
       @click="goback"
       variant="outline"
     />
-    <div
+    <div v-if="read.story === undefined || read.story.length === 0"
       class="grid"
       :key="read.current ? read.current : 'grid'"
       :class="read.current ? 'grid-cols-1' : 'grid-cols-1 md:grid-cols-2 gap-4'"
@@ -83,6 +83,18 @@
         </template>
       </UCard>
     </div>
+    <div v-else>
+        <article class="prose dark:prose-invert whitespace-pre-wrap text-justify prose-p:indent-4 min-w-full pt-0">
+        <TransitionGroup name="list">
+        <div v-for="(ch, index) of story" :key="index" class="relative pt-0 prose-p:last:mb-0">
+        <a :id="`chapitre${index}`" class="absolute -top-[calc(var(--header-height))]" />
+  <UDivider v-if="index !== 0" /><MdComp>{{ ch.text.replaceAll('\n', '\n\n') }}</MdComp>
+          <div class="absolute bottom-0 right-0 text-gray-500 dark:text-gray-400 italic">{{ read.users[ch.author] }}</div>
+        </div>
+        </TransitionGroup>
+        </article>
+          <SuiteMenu />
+    </div>
     <UButton
       class="my-4"
       v-if="read.current"
@@ -105,7 +117,9 @@
 
 const read = useReadingStore();
 await read.getRoots();
+await read.getUsers();
 await read.getReadings();
+const { story } = storeToRefs(read)
 read.current = "";
 
 // if(useRoute().params.id) read.current = read.storyList[0].id
@@ -123,6 +137,7 @@ const goback = () => {
   read.storyList = [];
   read.enfants = [];
   read.current = null;
+  read.story = [];
 };
 
 const new_reading = async (child: any, root: string) => {

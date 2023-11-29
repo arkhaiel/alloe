@@ -87,24 +87,26 @@ const newChap = async (id_parent: string) => {
 
 const addSuite = async (item: any) => {
   working.value = true
-  if (useRoute().path === "/lire") {
-    read.reading = await read.newReading(item.id, read.current.root);
+  if(read.story === undefined || read.story.length === 0) read.story = [read.current.root];
+  await nextChap(read.enfants.find(el => el.id === item.id), 'blabla')
+  // if (useRoute().path === "/lire") {
+  //   read.reading = await read.newReading(item.id, read.current.root);
 
-    if (read.reading) {
-      read.story = [read.current.root];
-      await nextChap(
-        read.enfants.find((el) => el.id == item.id),
-        read.reading.id
-      );
-      await navigateTo("/lire/" + read.reading.id);
-    }
-  } else {
-    await nextChap(
-      read.enfants.find((el) => el.id === item.id),
-      parid.toString(),
-      true
-    );
-  }
+  //   if (read.reading) {
+  //     read.story = [read.current.root];
+  //     await nextChap(
+  //       read.enfants.find((el) => el.id == item.id),
+  //       read.reading.id
+  //     );
+  //     await navigateTo("/lire/" + read.reading.id);
+  //   }
+  // } else {
+  //   await nextChap(
+  //     read.enfants.find((el) => el.id === item.id),
+  //     parid.toString(),
+  //     true
+  //   );
+  // }
   working.value = false
 };
 </script>
