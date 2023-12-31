@@ -107,13 +107,6 @@
 </template>
 
 <script lang="ts" setup>
-// definePageMeta({
-//   middleware: [async function(to, from) {
-//     console.log(to);
-
-//     if(to.path !== '/lire') return navigateTo('/lire')
-//   }]
-// })
 // TODO gros refactor 
 // TODO "où suis-je ?" > projet d'une vue graphique de l'histoire
 const read = useReadingStore();
@@ -121,7 +114,7 @@ await read.getRoots();
 await read.getUsers();
 await read.getReadings();
 const { story } = storeToRefs(read)
-read.current = "";
+read.current = null;
 
 // if(useRoute().params.id) read.current = read.storyList[0].id
 
@@ -150,16 +143,3 @@ const new_reading = async (child: any, root: string) => {
   }
 };
 </script>
-
-<style scoped>
-.v-enter-active,
-.v-leave-active {
-  transition: all 0.5s;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.v-enter-from,
-.v-leave-to {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-</style>

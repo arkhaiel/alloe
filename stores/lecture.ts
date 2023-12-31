@@ -1,3 +1,5 @@
+import type { Database } from '~/database.types'
+
 export const useReadingStore = defineStore('lecture', () => {
   const data = ref()
   const roots = ref()
@@ -9,6 +11,7 @@ export const useReadingStore = defineStore('lecture', () => {
   const current = ref()
   const isStory = ref(false)
   const users = ref()
+  const sb = useSupabaseClient<Database>()
 
   const quotaReading = computed(() => {
     if(reading.value) {
@@ -35,7 +38,7 @@ export const useReadingStore = defineStore('lecture', () => {
   async function newReading(id_chap: string, id_root: string) {
     return await useNewReading(id_chap, id_root)
   }
-  return { roots, users, quotaReading, data, reading, readings, story, storyList, enfants, current, isStory, getUsers, getRoots, getReadings, newReading }
+  return { roots, users, quotaReading, data, reading, readings, story, storyList, enfants, current, isStory, sb, getUsers, getRoots, getReadings, newReading }
 })
 
 if (import.meta.hot) {

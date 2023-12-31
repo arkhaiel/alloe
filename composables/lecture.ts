@@ -110,7 +110,7 @@ export const getFullReading = async() => {
 
 export const nextChap 
 = async (child: any, reading_id: string, update = false) => {
-  const supabase = useSupabaseClient<Database>()
+  // const supabase = useSupabaseClient<Database>()
   const read = useReadingStore()
   const toast = useToast()
   read.story.push(child)
@@ -118,7 +118,7 @@ export const nextChap
   read.enfants = await useGetChildren(child.id)
   if(update) {
     try {
-    const { data, error } = await supabase.from('readings').update({ last_chap: child.id, size: read.reading.size + 1 }).eq('id', reading_id).select();
+    const { data, error } = await read.sb.from('readings').update({ last_chap: child.id, size: read.reading.size + 1 }).eq('id', reading_id).select();
     if(error) throw error
     
     toast.add({ title: "Chapitre ajouté à votre histoire"})
@@ -136,8 +136,6 @@ export const prevChap
   read.story.pop()
   read.storyList.pop()
   read.enfants = await useGetChildren(read.storyList[read.storyList.length - 1])
-  read.reading.last_chap = read.storyList[read.storyList.length - 1]
-  read.reading.size -= 1
   if(update) {
     try {
     const { data, error } = await supabase.from('readings').update({ last_chap: child.id, size: read.reading.size + 1 }).eq('id', reading_id).select();
