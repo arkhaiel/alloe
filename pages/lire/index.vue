@@ -1,16 +1,22 @@
 <template>
   <div v-if="true">
-  <div class="flex flex-row justify-between" v-if="read.current">
-    <UButton
-      class="my-4"
-      icon="i-heroicons-arrow-left"
-      label="Retour"
-      @click="goback"
-      variant="outline"
-    />
-    <UButton v-if="read.story.length > 0" label="Enregistrer cette histoire" variant="ghost" @click="new_reading" />
+    <div class="flex flex-row justify-between" v-if="read.current">
+      <UButton
+        class="my-4"
+        icon="i-heroicons-arrow-left"
+        label="Retour"
+        @click="goback"
+        variant="outline"
+      />
+      <UButton
+        v-if="read.story.length > 0"
+        label="Enregistrer cette histoire"
+        variant="ghost"
+        @click="new_reading"
+      />
     </div>
-    <div v-if="read.story === undefined || read.story.length === 0"
+    <div
+      v-if="read.story === undefined || read.story.length === 0"
       class="grid"
       :key="read.current ? read.current : 'grid'"
       :class="read.current ? 'grid-cols-1' : 'grid-cols-1 md:grid-cols-2 gap-4'"
@@ -19,7 +25,11 @@
         v-for="r of read.current?read.roots.filter((el: any) => el.root.id === read.current.root.id) : read.roots"
         :key="r.root.id"
         :ui="{ body: { padding: 'pt-0 sm:pt-0' } }"
-        :class="read.current ? '' : 'cursor-pointer hover:bg-primary-50/50 dark:hover:bg-primary-900/50'"
+        :class="
+          read.current
+            ? ''
+            : 'cursor-pointer hover:bg-primary-50/50 dark:hover:bg-primary-900/50'
+        "
         @click="lecture(r)"
       >
         <template #header>
@@ -86,19 +96,40 @@
       </UCard>
     </div>
     <UCard v-else>
-          <template #footer>
-            <SuiteMenu />
-          </template>
-        <article class="prose dark:prose-invert whitespace-pre-wrap text-justify prose-p:indent-4 min-w-full pt-0">
+      <template #footer>
+        <SuiteMenu />
+      </template>
+      <article
+        class="prose dark:prose-invert whitespace-pre-wrap text-justify prose-p:indent-4 min-w-full pt-0"
+      >
         <TransitionGroup name="list">
-        <div v-for="(ch, index) of story" :key="index" class="relative pt-0 prose-p:last:mb-0">
-        <a :id="`chapitre${index}`" class="absolute -top-[calc(var(--header-height))]" />
-  <UDivider v-if="index !== 0" /><MdComp>{{ ch.text.replaceAll('\n', '\n\n') }}</MdComp>
-          <div class="absolute bottom-0 right-0 text-gray-500 dark:text-gray-400 italic">{{ read.users[ch.author] }}</div>
-        </div>
+          <div
+            v-for="(ch, index) of story"
+            :key="index"
+            class="relative pt-0 prose-p:last:mb-0"
+          >
+            <a
+              :id="`chapitre${index}`"
+              class="absolute -top-[calc(var(--header-height))]"
+            />
+            <UDivider v-if="index !== 0" /><MdComp>{{
+              ch.text.replaceAll("\n", "\n\n")
+            }}</MdComp>
+            <div
+              class="absolute bottom-0 right-0 text-gray-500 dark:text-gray-400 italic"
+            >
+              {{ read.users[ch.author] }}
+            </div>
+          </div>
         </TransitionGroup>
-        </article>
-
+      </article>
+      <div class="fixed bottom-2 left-0 flex flex-row justify-center w-screen">
+        <UDropdown :items="chapsNav">
+          <UBadge size="lg" v-if="read.quotaReading"
+            >{{ read.quotaReading.current }} / {{ read.quotaReading.max }}</UBadge
+          >
+        </UDropdown>
+      </div>
     </UCard>
     <UButton
       class="my-4"
@@ -112,7 +143,7 @@
 </template>
 
 <script lang="ts" setup>
-// TODO gros refactor 
+// TODO gros refactor
 // TODO "où suis-je ?" > projet d'une vue graphique de l'histoire
 const read = useReadingStore();
 await read.getRoots();
@@ -141,8 +172,31 @@ const goback = () => {
   read.story = [];
 };
 
+const chapsNav = computed(() => {
+  return story.value
+    .map((el, index) => {
+      return [
+        {
+          label: `chapitre ${index}`,
+          to: `#chapitre${index}`,
+        },
+      ];
+    })
+    .concat([
+      [
+        {
+          label: "suites",
+          to: "#suitemenu",
+        },
+      ],
+    ]);
+});
+
 const new_reading = async () => {
-  read.reading = await read.newReading(read.story[read.story.length - 1].id, read.current.root);
+  read.reading = await read.newReading(
+    read.story[read.story.length - 1].id,
+    read.current.root
+  );
 
   if (read.reading) {
     await navigateTo("/lire/" + read.reading.id);

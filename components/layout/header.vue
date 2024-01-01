@@ -45,7 +45,7 @@ const links = [{
 </script>
 
 <template>
-  <UHeader :links="links" :to="us.user ? '/mes-textes' : '/'">
+  <UHeader :links="links" :to="us.user ? '/mes-textes' : '/'" :ui="{ button: { base: 'hidden'}}">
     <template #logo>
       <Logo :isDark="isDark" />
     </template>

@@ -17,7 +17,7 @@ export const useReadingStore = defineStore('lecture', () => {
     if(reading.value) {
       return {
         max: roots.value.find(el => el.root.id === reading.value.root_chap).root.constrains.max_chaps,
-        current: reading.value.size
+        current: storyList.value.length
       }
     } else return null
   })

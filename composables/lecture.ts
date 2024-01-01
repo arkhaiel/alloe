@@ -45,8 +45,7 @@ export const useGetChaps = async (story: string[]) => {
     if(error) throw error
     return data.map(el => {
       return {
-        ...el,
-        author: el.user_view.username
+        ...el
       }
     })
   } catch (error) {
