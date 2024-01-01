@@ -1,6 +1,6 @@
 <template>
   <div class="gradient" />
-  <ULandingHero :links="page.hero.links">
+  <ULandingHero :links="page.hero.links" :ui="{ wrapper: 'py-10 sm:py-16 md:py-24' }">
     <template #headline>
     <UButton variant="soft" label="v1.0 : Voir les changements" to="/changelog" />
     </template>
@@ -12,13 +12,13 @@
       <span v-html="page.hero.description" />
     </template>
   </ULandingHero>
-  <ULandingSection headline="lire et écrire" title="Des histoires dont vous êtes le héros">
+  <ULandingSection :ui="{ wrapper: 'py-10 sm:py-16', title: 'sm:text-xl lg:text-xl text-md font-normal'}" headline="lire et écrire" title="Des histoires dont vous êtes le héros">
   <ULandingGrid>
     <ULandingCard
         v-for="(card, index) of page.features"
         :key="index"
         v-bind="card"
-        class="col-span-3">
+        class="col-span-4">
     <div class="flex flex-row justify-around">
       <UButton variant="outline" v-for="l of card.links" :label="l.label" :to="l.to" />
     </div>

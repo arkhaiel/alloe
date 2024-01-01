@@ -17,7 +17,7 @@
         v-for="r of read.current?read.roots.filter((el: any) => el.root.id === read.current.root.id) : read.roots"
         :key="r.root.id"
         :ui="{ body: { padding: 'py-0 sm:py-0' } }"
-        :class="read.current ? '' : 'cursor-pointer'"
+        :class="read.current ? '' : 'cursor-pointer hover:bg-primary-50/50 dark:hover:bg-primary-900/50'"
         @click="lecture(r)"
       >
         <template #header>

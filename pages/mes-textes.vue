@@ -107,7 +107,7 @@
             supprimés sous 24h.
           </p>
           <UCard
-            class="text-justify cursor-pointer hover:bg-primary-50"
+            class="text-justify cursor-pointer hover:bg-primary-50/50 dark:hover:bg-primary-900/50"
             :ui="{ body: { padding: 'p-2 sm:p-2' } }"
             v-for="c of chaps"
             @click="navToWriting(c.id)"

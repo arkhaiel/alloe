@@ -1,5 +1,5 @@
 <template>
-  <UCard :ui="{ body: { padding: 'py-0 sm:py-0' }}" class="prose dark:prose-invert prose-h1:text-lg prose-h2:text-base prose-a:no-underline max-w-full m-auto ring-1 rounded-md mb-2 whitespace-pre-wrap text-justify">
+  <UCard :ui="{ body: { padding: 'pb-0 sm:pb-0' }}" class="prose dark:prose-invert prose-h1:text-lg prose-h2:text-base prose-a:no-underline max-w-full m-auto ring-1 rounded-md mb-2 whitespace-pre-wrap text-justify">
 <MdComp v-if="tutopage === '/lire'">
 # Ici, vous commencez une nouvelle histoire
 Le principe est simple, vous avez plusieurs points de départ possibles (pour l'instant, c'est des "challoé" : les propositions sont les bienvenues.)
