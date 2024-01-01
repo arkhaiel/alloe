@@ -1,13 +1,15 @@
 <template>
   <div v-if="true">
+  <div class="flex flex-row justify-between" v-if="read.current">
     <UButton
       class="my-4"
-      v-if="read.current"
       icon="i-heroicons-arrow-left"
       label="Retour"
       @click="goback"
       variant="outline"
     />
+    <UButton v-if="read.story.length > 0" label="Enregistrer cette histoire" variant="ghost" @click="new_reading" />
+    </div>
     <div v-if="read.story === undefined || read.story.length === 0"
       class="grid"
       :key="read.current ? read.current : 'grid'"
@@ -16,7 +18,7 @@
       <UCard
         v-for="r of read.current?read.roots.filter((el: any) => el.root.id === read.current.root.id) : read.roots"
         :key="r.root.id"
-        :ui="{ body: { padding: 'py-0 sm:py-0' } }"
+        :ui="{ body: { padding: 'pt-0 sm:pt-0' } }"
         :class="read.current ? '' : 'cursor-pointer hover:bg-primary-50/50 dark:hover:bg-primary-900/50'"
         @click="lecture(r)"
       >
@@ -71,7 +73,7 @@
           </div>
         </template>
         <div
-          class="prose dark:prose-invert whitespace-pre-wrap text-justify prose-p:indent-4 min-w-full"
+          class="prose dark:prose-invert whitespace-pre-wrap text-justify prose-p:indent-4 min-w-full pt-2"
         >
           <MdComp>{{
             read.current ? r.root.text : r.root.text.slice(0, 300) + "..."
@@ -83,7 +85,10 @@
         </template>
       </UCard>
     </div>
-    <div v-else>
+    <UCard v-else>
+          <template #footer>
+            <SuiteMenu />
+          </template>
         <article class="prose dark:prose-invert whitespace-pre-wrap text-justify prose-p:indent-4 min-w-full pt-0">
         <TransitionGroup name="list">
         <div v-for="(ch, index) of story" :key="index" class="relative pt-0 prose-p:last:mb-0">
@@ -93,8 +98,8 @@
         </div>
         </TransitionGroup>
         </article>
-          <SuiteMenu />
-    </div>
+
+    </UCard>
     <UButton
       class="my-4"
       v-if="read.current"
@@ -113,7 +118,9 @@ const read = useReadingStore();
 await read.getRoots();
 await read.getUsers();
 await read.getReadings();
-const { story } = storeToRefs(read)
+const { story } = storeToRefs(read);
+read.story = [];
+read.storyList = [];
 read.current = null;
 
 // if(useRoute().params.id) read.current = read.storyList[0].id
@@ -134,11 +141,10 @@ const goback = () => {
   read.story = [];
 };
 
-const new_reading = async (child: any, root: string) => {
-  read.reading = await read.newReading(child.id, root);
+const new_reading = async () => {
+  read.reading = await read.newReading(read.story[read.story.length - 1].id, read.current.root);
 
   if (read.reading) {
-    await nextChap(child, read.reading.id);
     await navigateTo("/lire/" + read.reading.id);
   }
 };

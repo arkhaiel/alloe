@@ -35,8 +35,8 @@ export const useReadingStore = defineStore('lecture', () => {
     readings.value = await useGetReadings()
   }
 
-  async function newReading(id_chap: string, id_root: string) {
-    return await useNewReading(id_chap, id_root)
+  async function newReading(id_chap: string, root: any) {    
+    return await useNewReading(id_chap, root)
   }
   return { roots, users, quotaReading, data, reading, readings, story, storyList, enfants, current, isStory, sb, getUsers, getRoots, getReadings, newReading }
 })

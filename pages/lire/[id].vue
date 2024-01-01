@@ -1,5 +1,5 @@
 <template>
-  <UCard class="mb-48" :ui="{ body: { padding: 'py-0 sm:py-0' }}" >
+  <UCard class="mb-48" :ui="{ body: { padding: 'pt-0 sm:pt-0' }}" >
   <template #footer v-if="read.current">
   <a id="suitemenu" />
   <SuiteMenu v-if="read.quotaReading && (read.quotaReading.current < read.quotaReading.max)" />
