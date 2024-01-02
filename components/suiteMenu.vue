@@ -45,10 +45,7 @@
           @click="newChap(read.storyList[read.storyList.length - 1])"
         />
         <p class="mt-2">
-          Attention: en cliquant sur ce bouton, vous allez automatiquement créer un
-          nouveau chapitre. Vous ne pourrez pas le supprimer, l'emplacement sera réservé
-          pour vous. Vous pourrez cependant commencer son écriture et réaliser les
-          modifications que vous souhaitez plus tard.
+          Attention, vous allez créer un chapitre en cliquant sur ce bouton !
         </p>
       </div>
     </template>
