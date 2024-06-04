@@ -7,7 +7,7 @@
       <template #title-data="{ row }"
         ><UButton
           :label="row.title"
-          :to="'/news' + row._path"
+          :to="row._path"
           variant="link"
           class="whitespace-normal"
       /></template>
