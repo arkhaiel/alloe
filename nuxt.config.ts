@@ -1,70 +1,49 @@
-import { resolve } from 'pathe'
+import Aura from '@primevue/themes/aura'
 
 export default defineNuxtConfig({
-    devtools: { enabled: false },
-    extends: ['@nuxt/ui-pro'],
-    app: {
-        head: {
-            meta: [{
-                "name": "viewport",
-                "content": "width=device-width, initial-scale=1"
-            },
-            {
-                "charset": "utf-8"
-            }],
-            title: "alloé: allez, on écrit !"
-        }, 
+  modules: [
+    '@nuxthub/core',
+    '@nuxt/eslint',
+    '@nuxt/content',
+    'nuxt-auth-utils',
+    '@pinia/nuxt',
+    '@nuxtjs/tailwindcss',
+    '@nuxtjs/color-mode',
+    '@primevue/nuxt-module',
+    'nuxt-authorization',
+  ],
+  devtools: { enabled: true },
+  css: [
+    'primeicons/primeicons.css',
+  ],
+  colorMode: {
+    classSuffix: '',
+  },
+  future: { compatibilityVersion: 4 },
+  compatibilityDate: '2024-07-30',
+  hub: {
+    database: true,
+  },
+  eslint: {
+    config: {
+      stylistic: {
+        quotes: 'single',
+      },
     },
-    typescript: {
-        strict: true
-    },
-    ssr: false,
-    vue: {
-        compilerOptions: {
-            whitespace: 'preserve'
-        }
-    },
-    hooks: {
-        close: () => {
-            process.exit()
-        }
-    },
-    modules: [
-        '@nuxt/content',
-        '@nuxt/ui',
-        '@nuxtjs/supabase',
-        '@vueuse/nuxt',
-        '@pinia/nuxt',
-        '@nuxtjs/mdc'
-    ],
-    runtimeConfig: {
-      public: {
-        SUPBASE_URL: '',
-        SUPBASE_KEY: ''
-      }
-    },
-    content: {
-        experimental: {
-            clientDB: true
+  },
+  primevue: {
+    usePrimeVue: true,
+    options: {
+      theme: {
+        cssLayer: {
+          name: 'primevue',
+          order: 'tailwind-base, primevue, tailwind-utilities',
         },
-        api: {
-            baseURL: '/api/_content'
+        preset: Aura,
+        options: {
+          darkModeSelector: '.dark',
         },
-        documentDriven: {
-            injectPage: false
-        },
-        navigation: {
-            fields: ['date', 'version']
-        },
+      },
     },
-    supabase: {
-      redirectOptions: {
-        login: '/login',
-        callback: '/confirm',
-        exclude: ['/', '/news/*', '/news', '/cgu', '/cgu/*', '/changelog', '/changelog/*']
-      }
-    },
-    ui: {
-        global: true
-    }
-  })
+  },
+})
