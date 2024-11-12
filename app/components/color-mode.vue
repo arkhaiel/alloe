@@ -1,6 +1,6 @@
 <template>
   <ClientOnly>
-    <Button icon="pi pi-moon" @click="$colorMode.preference = $colorMode.value === 'dark' ? 'light' : 'dark'" />
+    <UButton label="mode" @click="$colorMode.preference = $colorMode.value === 'dark' ? 'light' : 'dark'" />
   </ClientOnly>
 </template>
 

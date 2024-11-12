@@ -6,6 +6,6 @@ const test = createId()
 
 <template>
   <article class="prose dark:prose-invert">
-  <h1>alloé</h1>
+    <h1>alloé</h1>
   </article>
 </template>
