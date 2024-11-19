@@ -1,4 +1,4 @@
-import { listPosts } from '~/utils/abilities'
+import { listPosts } from '~~/shared/utils/abilities'
 
 export default defineEventHandler(async (event) => {
   await authorize(event, listPosts)
