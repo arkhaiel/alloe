@@ -1,10 +1,10 @@
 <template>
   <div class="grid grid-cols-12 gap-6">
     <div class="col-span-2">
-    <ColorMode />
+      <ColorMode />
     </div>
     <div class="col-span-10">
-    <slot />
+      <slot />
     </div>
   </div>
 </template>

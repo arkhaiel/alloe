@@ -20,6 +20,9 @@ export default defineNuxtConfig({
     classSuffix: '',
   },
   future: { compatibilityVersion: 4 },
+  experimental: {
+    renderJsonPayloads: false,
+  },
   compatibilityDate: '2024-07-30',
   hub: {
     database: true,

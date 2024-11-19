@@ -11,5 +11,6 @@ export function useDrizzle() {
 }
 
 export type Chapter = typeof schema.chapters.$inferSelect
-export type User = typeof schema.users.$inferSelect
+export type dbUser = typeof schema.users.$inferSelect
+export type AuthMethod = typeof schema.authMethods.$inferSelect
 export type Post = typeof schema.posts.$inferSelect

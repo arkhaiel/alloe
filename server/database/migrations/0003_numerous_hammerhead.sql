@@ -1,0 +1,1 @@
+ALTER TABLE `auth_methods` ADD `counter` integer DEFAULT 0;
