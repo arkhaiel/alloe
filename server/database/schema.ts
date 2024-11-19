@@ -3,10 +3,20 @@ import { createId } from '@paralleldrive/cuid2'
 
 export const users = sqliteTable('users', {
   id: text('id').primaryKey().$defaultFn(() => createId()),
-  name: text('name').notNull(),
-  email: text('email').notNull().unique(),
-  password: text('password').notNull(),
-  avatar: text('avatar').notNull(),
+  name: text('name'),
+  email: text('email').unique(),
+  avatar: text('avatar'),
+  createdAt: text('created_at').$defaultFn(() => Date.now().toString()),
+})
+
+export const authMethods = sqliteTable('auth_methods', {
+  id: text('id').primaryKey().$defaultFn(() => createId()),
+  type: text({ enum: ['password']}).notNull(),
+  userId: text('user_id').references(() => users.id).notNull(),
+  counter: integer('counter').default(0).notNull(),
+  identifier: text('identifier'),
+  hashedPassword: text('password'),
+  providerData: text('provider_data'),
   createdAt: text('created_at').$defaultFn(() => Date.now().toString()),
 })
 
