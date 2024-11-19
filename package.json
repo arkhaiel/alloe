@@ -12,16 +12,22 @@
     "db:generate": "drizzle-kit generate"
   },
   "dependencies": {
+    "@nuxt/content": "3.0.0-alpha.6",
+    "@nuxt/eslint": "^0.6.1",
+    "@nuxt/ui": "3.0.0-alpha.7",
+    "@nuxt/ui-pro": "3.0.0-alpha.8",
+    "@nuxthub/core": "^0.8.6",
     "@nuxt/content": "^2.13.4",
     "@nuxt/eslint": "^0.6.0",
     "@nuxthub/core": "^0.8.2",
     "@nuxtjs/color-mode": "^3.5.2",
     "@nuxtjs/tailwindcss": "^6.12.2",
     "@paralleldrive/cuid2": "^2.2.2",
-    "@pinia/nuxt": "^0.5.5",
-    "@primevue/nuxt-module": "^4.1.1",
-    "@primevue/themes": "^4.1.1",
+    "@pinia/nuxt": "^0.7.0",
     "@tailwindcss/typography": "^0.5.15",
+    "drizzle-orm": "^0.36.1",
+    "nuxt": "^3.14.159",
+    "nuxt-auth-utils": "^0.5.3",
     "@tiptap/pm": "^2.9.1",
     "@tiptap/starter-kit": "^2.9.1",
     "@tiptap/vue-3": "^2.9.1",
@@ -30,20 +36,15 @@
     "nuxt-auth-utils": "^0.5.0",
     "nuxt-authorization": "^0.3.0",
     "pinia": "^2.2.4",
-    "primeicons": "^7.0.0",
-    "primevue": "^4.1.1",
     "save": "^2.9.0",
-    "tailwindcss": "^3.4.14",
-    "tailwindcss-primeui": "^0.3.4",
     "vue": "^3.5.12",
     "vue-router": "^4.4.5"
   },
   "devDependencies": {
-    "@nuxt/eslint-config": "^0.6.0",
-    "drizzle-kit": "^0.26.2",
-    "eslint": "^9.13.0",
+    "drizzle-kit": "^0.28.0",
+    "typescript": "^5.6.3",
     "vue-tsc": "^2.1.6",
-    "wrangler": "^3.83.0"
+    "wrangler": "^3.86.1"
   },
   "packageManager": "pnpm@9.10.0"
 }
